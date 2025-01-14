@@ -1,10 +1,73 @@
 import { Helmet } from "react-helmet";
 import lottiSignup from "../assets/LottiFile/signup.json";
 import Lottie from "lottie-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Signup = () => {
+    const navigate = useNavigate()
+    const {signupUser,setUser,userInfo} = useContext(AuthContext)
+
+    const handleSignupUser = (event) => {
+        event.preventDefault();
+        const name = event.target.name.value;
+        const photo = event.target.photo.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        const tram = event.target.tram.checked;
+        
+        const userData = {
+            name,email,password,photo
+        }
+
+        if(password.length<6){
+            return  Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Password must be at least 6 characters long",
+              });
+        }
+
+        if(!tram){
+            return Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "plase accept our condition."
+              });
+        }
+
+        const passwordPattern =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+      if(!passwordPattern.test(password)){
+        return Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Password is not strong enough.",
+          });
+      }
+
+
+        signupUser(email,password)
+        .then((userCredential) => {
+            const user = userCredential.user
+            userInfo({ displayName: name, photoURL: photo })
+            setUser(user)
+            event.target.reset();
+            navigate('/')
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Registration successful! ",
+                showConfirmButton: false,
+                timer: 1500
+              });
+
+        })
+    }
   return (
     <div className="w-11/12 mx-auto my-5">
         <Link to={'/'}><button className="btn bg-[#FFA500] text-white font-semibold"><FaArrowLeft></FaArrowLeft> Back to Home</button></Link> 
@@ -25,7 +88,7 @@ const Signup = () => {
         <h1 className="font-semibold text-2xl text-center">
               Register your account
             </h1>
-          <form className="w-full flex flex-col space-y-4">
+          <form onSubmit={handleSignupUser} className="w-full flex flex-col space-y-4">
           <div className="form-control">
                 <label className="label">
                   <span className="label-text">Your Name</span>
@@ -55,6 +118,7 @@ const Signup = () => {
               </label>
               <input
                 type="email"
+                name="email"
                 placeholder="Email"
                 className="input input-bordered w-full p-4 rounded-lg"
                 required
@@ -66,6 +130,7 @@ const Signup = () => {
               </label>
               <input
                 type="password"
+                name="password"
                 placeholder="Password"
                 className="input input-bordered w-full p-4 rounded-lg"
                 required
