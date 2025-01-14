@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 const Signup = () => {
     const navigate = useNavigate()
-    const {signupUser,setUser,userInfo} = useContext(AuthContext)
+    const {signupUser,setUser,userInfo,userGoogleLogin} = useContext(AuthContext)
 
     const handleSignupUser = (event) => {
         event.preventDefault();
@@ -77,6 +77,26 @@ const Signup = () => {
               text: errorMessage,
             });
           });
+    }
+
+
+    const googlelogin =() => {
+        userGoogleLogin()
+        .then((res) => {
+            const user = res.user
+            setUser(user)
+            if(user.email){
+                navigate('/')
+            }
+
+            return Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Google SignUp successful! ",
+                showConfirmButton: false,
+                timer: 1500
+              });
+        })
     }
   return (
     <div className="w-11/12 mx-auto my-5">
@@ -162,7 +182,7 @@ const Signup = () => {
             </div>
             <div className="divider">OR</div>
               <div className="form-control mt-6 mb-4">
-                <button  className="btn btn-neutral">
+                <button onClick={googlelogin} className="btn btn-neutral">
                   {" "}
                   <img
                     className="h-8"
