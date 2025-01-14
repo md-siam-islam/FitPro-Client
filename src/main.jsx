@@ -3,11 +3,23 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Components/Home/Home";
+import Homelayout from "./Components/Homelayout/Homelayout";
+import AllClasses from "./Page/AllClassesSection/AllClasses";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home></Home>,
+    element: <Homelayout></Homelayout>,
+    children: [
+      {
+        path:"/",
+        element:<Home></Home>
+      },
+      {
+        path:'/classes',
+        element:<AllClasses></AllClasses>
+      }
+    ],
   },
 ]);
 

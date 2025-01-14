@@ -25,7 +25,7 @@ const Navbar = () => {
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
          <NavLink><li><a>Home</a></li> </NavLink>
         <NavLink><li><a>All Trainer</a></li> </NavLink>
-        <NavLink><li><a>All Classes</a></li> </NavLink>
+        <NavLink to={'/classes'}><li><a>All Classes</a></li> </NavLink>
         <NavLink><li><a>Community</a></li> </NavLink>
         <NavLink><li><a>Dashboard</a></li> </NavLink>
       </ul>
@@ -34,9 +34,9 @@ const Navbar = () => {
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-        <NavLink className={({isActive}) => isActive ? "bg-[#FFA500] text-white font-semibold rounded":"font-semibold"}><li><a>Home</a></li> </NavLink>
+        <NavLink to={"/"} className={({isActive}) => isActive ? "bg-[#FFA500] text-white font-semibold rounded":"font-semibold"}><li><a>Home</a></li> </NavLink>
         <NavLink><li><a>All Trainer</a></li> </NavLink>
-        <NavLink><li><a>All Classes</a></li> </NavLink>
+        <NavLink to={'/classes'} className={({isActive}) => isActive ? "bg-[#FFA500] text-white font-semibold rounded":"font-semibold"}><li><a>All Classes</a></li> </NavLink>
         <NavLink><li><a>Community</a></li> </NavLink>
         <NavLink><li><a>Dashboard</a></li> </NavLink>
     </ul>
