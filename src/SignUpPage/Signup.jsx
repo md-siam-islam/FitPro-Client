@@ -67,6 +67,16 @@ const Signup = () => {
               });
 
         })
+
+        .catch((error) => {
+            const errorMessage =
+              error.message || "Something went wrong. Please try again.";
+            return Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: errorMessage,
+            });
+          });
     }
   return (
     <div className="w-11/12 mx-auto my-5">

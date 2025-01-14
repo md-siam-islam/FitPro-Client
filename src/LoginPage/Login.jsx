@@ -1,16 +1,56 @@
 import { Helmet } from "react-helmet";
 import LoginLotti from "../assets/LottiFile/Login.json";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import { FaArrowLeft } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const { userLogin, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleUserLogin = (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    userLogin(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setUser(user);
+        event.target.reset();
+        navigate("/");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login Successfull ",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+
+      .catch((error) => {
+        const errorMessage =
+          error.message || "Something went wrong. Please try again.";
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: errorMessage,
+        });
+      });
+  };
   return (
     <div className="my-5 w-11/12 mx-auto">
       <Helmet>
         <title>FitPro || Login</title>
       </Helmet>
-      <Link to={'/'}><button className="btn bg-[#FFA500] text-white font-semibold"><FaArrowLeft></FaArrowLeft> Back to Home</button></Link>
+      <Link to={"/"}>
+        <button className="btn bg-[#FFA500] text-white font-semibold">
+          <FaArrowLeft></FaArrowLeft> Back to Home
+        </button>
+      </Link>
       <div className="max-w-6xl w-full flex flex-col lg:flex-row items-center justify-between p-8 mx-auto bg-white rounded-lg shadow-lg">
         <div className="w-full lg:w-1/2 flex justify-center items-center">
           <Lottie
@@ -24,13 +64,17 @@ const Login = () => {
           <h1 className="font-semibold text-2xl text-center">
             Login your account
           </h1>
-          <form className="w-full flex flex-col space-y-4">
+          <form
+            onSubmit={handleUserLogin}
+            className="w-full flex flex-col space-y-4"
+          >
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
                 type="email"
+                name="email"
                 placeholder="Email"
                 className="input input-bordered w-full p-4 rounded-lg"
                 required
@@ -42,6 +86,7 @@ const Login = () => {
               </label>
               <input
                 type="password"
+                name="password"
                 placeholder="Password"
                 className="input input-bordered w-full p-4 rounded-lg"
                 required
@@ -67,7 +112,7 @@ const Login = () => {
               </button>
             </div>
             <div>
-            <h1 className="font-semibold text-center">
+              <h1 className="font-semibold text-center">
                 Don’t Have An Account?
                 <Link to={"/signup"} className="text-[#FFA500]">
                   {" "}
