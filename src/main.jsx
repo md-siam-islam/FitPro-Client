@@ -5,6 +5,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import Homelayout from "./Components/Homelayout/Homelayout";
 import AllClasses from "./Page/AllClassesSection/AllClasses";
+import Signup from "./SignUpPage/Signup";
+import Login from "./LoginPage/Login";
+
 
 const router = createBrowserRouter([
   {
@@ -12,21 +15,31 @@ const router = createBrowserRouter([
     element: <Homelayout></Homelayout>,
     children: [
       {
-        path:"/",
-        element:<Home></Home>
+        path: "/",
+        element: <Home></Home>,
       },
       {
-        path:'/classes',
-        element:<AllClasses></AllClasses>
-      }
+        path: "/classes",
+        element: <AllClasses></AllClasses>,
+      },
     ],
   },
+  {
+    path: "/signup",
+    element: <Signup></Signup>,
+  },
+  {
+    path:'/login',
+    element:<Login></Login>
+  }
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <div className="font-font">
-      <RouterProvider router={router} />
+
+        <RouterProvider router={router} />
+     
     </div>
   </StrictMode>
 );
