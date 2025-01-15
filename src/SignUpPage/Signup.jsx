@@ -100,17 +100,27 @@ const Signup = () => {
         .then((res) => {
             const user = res.user
             setUser(user)
-            if(user.email){
-                navigate('/')
-            }
 
-            return Swal.fire({
+            const userInfo = {
+              name: user.displayName,
+              email: user.email,
+            };
+
+            AxiosPublic.post('/user',userInfo)
+            .then((res) => {
+              if(res.data.insertedId){
+                if(user.email){
+                  navigate('/')
+              }
+              Swal.fire({
                 position: "top-end",
                 icon: "success",
                 title: "Google SignUp successful! ",
                 showConfirmButton: false,
                 timer: 1500
               });
+              }
+            })
         })
     }
     // Google Login section end
