@@ -99,11 +99,14 @@ const Navbar = () => {
               <a>Community</a>
             </li>{" "}
           </NavLink>
-          <NavLink>
-            <li>
-              <a>Dashboard</a>
-            </li>{" "}
-          </NavLink>
+         {
+          user ?  
+          <NavLink to={'/dashboard'}>
+          <li>
+            <a>Dashboard</a>
+          </li>{" "}
+        </NavLink> : ''
+         }
         </ul>
       </div>
       <div className="navbar-end gap-3">

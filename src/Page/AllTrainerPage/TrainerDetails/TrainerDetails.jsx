@@ -88,12 +88,13 @@ const TrainerDetails = () => {
             If you are passionate about training and helping others achieve
             their goals, join our team of expert trainers.
           </p>
-          <button
-            onClick={() => navigate("/become-a-trainer")}
+         <Link to={"/becometrainer"}>
+         <button
             className="btn bg-[#FFA500]"
           >
             Become a Trainer
           </button>
+         </Link>
         </div>
       </div>
     </div>

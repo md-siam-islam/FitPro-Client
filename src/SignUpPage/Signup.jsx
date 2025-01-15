@@ -62,7 +62,8 @@ const Signup = () => {
               const userData = {
                 name:name,
                 email:email,
-                photo:photo
+                photo:photo,
+                role:'member'
             }
             AxiosPublic.post('/user',userData)
             .then((res) => {
@@ -104,6 +105,7 @@ const Signup = () => {
             const userInfo = {
               name: user.displayName,
               email: user.email,
+              role:'member'
             };
 
             AxiosPublic.post('/user',userInfo)

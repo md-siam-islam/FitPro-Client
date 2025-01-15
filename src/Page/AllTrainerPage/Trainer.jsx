@@ -9,7 +9,8 @@ const Trainer = () => {
 
   useEffect(() => {
     axios.get("http://localhost:5000/trainer").then((res) => {
-      setTrainers(res.data);
+    const filteredTrainers = res.data.filter((item) => item.role === "trainer");
+    setTrainers(filteredTrainers);
     });
   }, []);
 
