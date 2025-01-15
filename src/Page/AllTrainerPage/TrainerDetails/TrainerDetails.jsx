@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import useAxiosPublic from "../../../Components/UseAxiosPublic/useAxiosPublic";
+import { Helmet } from "react-helmet";
 
 const TrainerDetails = () => {
   const [details, setDetails] = useState(null);
@@ -20,7 +21,12 @@ const TrainerDetails = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold my-5 text-center underline">{details.name} Details Page</h1>
+      <Helmet>
+        <title>FitPro | {details.name} Details page </title>
+      </Helmet>
+      <h1 className="text-3xl font-bold my-5 text-center underline">
+        {details.name} Details Page
+      </h1>
       <div className="p-5 bg-gray-100">
         {/* Trainer Information Section */}
         <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
@@ -61,13 +67,16 @@ const TrainerDetails = () => {
           <h2 className="text-2xl font-bold mb-4">Available Slots</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {details.availableSlots?.map((slot, index) => (
-              <button
+              <Link
                 key={index}
-                onClick={() => navigate(`/trainer-booking/${id}?slot=${slot}`)}
-                className="btn btn-outline bg-[#FFA500] w-full"
+                to={`/trainerbooked/${details.name}/${slot.day}-${
+                  slot.time
+                }/${details.expertise.join(",")}`}
               >
-                {slot.day},{slot.time}
-              </button>
+                <button className="btn btn-outline bg-[#FFA500] w-full">
+                  {slot.day}, {slot.time}
+                </button>
+              </Link>
             ))}
           </div>
         </div>

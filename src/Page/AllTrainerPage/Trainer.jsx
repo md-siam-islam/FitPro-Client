@@ -3,6 +3,7 @@ import img from "../../assets/image/img4.jpg";
 import axios from "axios";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 const Trainer = () => {
   const [trainers, setTrainers] = useState([]);
 
@@ -14,6 +15,9 @@ const Trainer = () => {
 
   return (
     <div>
+        <Helmet>
+            <title>FitPro | All Trainer Page</title>
+        </Helmet>
       <div
         className="hero h-[700px] mb-10"
         style={{

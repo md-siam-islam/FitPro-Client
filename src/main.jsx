@@ -10,6 +10,7 @@ import Login from "./LoginPage/Login";
 import AuthProvider from "./AuthProvider/AuthProvider";
 import Trainer from "./Page/AllTrainerPage/Trainer";
 import TrainerDetails from "./Page/AllTrainerPage/TrainerDetails/TrainerDetails";
+import TrainerBookedPage from "./Page/AllTrainerPage/TrainerBookedPage/TrainerBookedPage";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
       {
         path:'/trainerDetails/:id',
         element:<TrainerDetails></TrainerDetails>
+      },
+      // trainer booked privet route pore korbo 
+      {
+        path:'/trainerbooked/:trainername/:solt/:expertise',
+        element:<TrainerBookedPage></TrainerBookedPage>
       },
       {
         path: "/classes",
