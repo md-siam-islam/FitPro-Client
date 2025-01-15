@@ -9,6 +9,7 @@ import Signup from "./SignUpPage/Signup";
 import Login from "./LoginPage/Login";
 import AuthProvider from "./AuthProvider/AuthProvider";
 import Trainer from "./Page/AllTrainerPage/Trainer";
+import TrainerDetails from "./Page/AllTrainerPage/TrainerDetails/TrainerDetails";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path:'/trainer',
         element:<Trainer></Trainer>
+      },
+      {
+        path:'/trainerDetails/:id',
+        element:<TrainerDetails></TrainerDetails>
       },
       {
         path: "/classes",
