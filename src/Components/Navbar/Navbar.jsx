@@ -33,7 +33,7 @@ const Navbar = () => {
                 <a>Home</a>
               </li>{" "}
             </NavLink>
-            <NavLink>
+            <NavLink to={"/trainer"}>
               <li>
                 <a>All Trainer</a>
               </li>{" "}
@@ -73,7 +73,11 @@ const Navbar = () => {
               <a>Home</a>
             </li>{" "}
           </NavLink>
-          <NavLink>
+          <NavLink to={'/trainer'}  className={({ isActive }) =>
+              isActive
+                ? "bg-[#FFA500] text-white font-semibold rounded"
+                : "font-semibold"
+            }>
             <li>
               <a>All Trainer</a>
             </li>{" "}

@@ -1,0 +1,123 @@
+[
+    {
+      "name": "John Doe",
+      "profileImage": "https://i.ibb.co.com/L17Bzcw/istockphoto-675179390-612x612.jpg",
+      "experience": "5 Years",
+      "socialIcons": ["Facebook", "Instagram", "LinkedIn"],
+      "availableSlots": [
+        {"day": "Monday", "time": "9:00 AM - 10:00 AM"},
+        {"day": "Wednesday", "time": "4:00 PM - 5:00 PM"}
+      ],
+      "expertise": ["Yoga", "Pilates"],
+      "details": "Specializes in mindfulness and stress relief through yoga techniques."
+    },
+    {
+      "name": "Sarah Lee",
+      "profileImage": "https://i.ibb.co.com/njMwYfd/360-F-562092860-m-WJBNRq-Tg4rarfo-Ja-Sdka-Llfy1dkr-P33.jpg",
+      "experience": "7 Years",
+      "socialIcons": ["Twitter", "Instagram"],
+      "availableSlots": [
+        {"day": "Tuesday", "time": "2:00 PM - 3:00 PM"},
+        {"day": "Thursday", "time": "6:00 PM - 7:00 PM"}
+      ],
+      "expertise": ["Zumba", "Cardio Training"],
+      "details": "Certified in group fitness training with a focus on high-energy cardio."
+    },
+    {
+      "name": "James Smith",
+      "profileImage": "https://i.ibb.co.com/4Vsnd8H/young-bangladeshi-male-fitness-trainer-in-modern-gym-environment-suitable-for-health-and-wellness-pr.jpg",
+      "experience": "3 Years",
+      "socialIcons": ["Facebook", "Twitter"],
+      "availableSlots": [
+        {"day": "Friday", "time": "10:00 AM - 11:00 AM"},
+        {"day": "Saturday", "time": "8:00 AM - 9:00 AM"}
+      ],
+      "expertise": ["Strength Training", "Weightlifting"],
+      "details": "Focuses on building strength and improving overall endurance."
+    },
+    {
+      "name": "Emma Brown",
+      "profileImage": "https://i.ibb.co.com/xGPLG66/360-F-635175286-Ve3-Rn-NYKc-Hm-Ws-HRNNho-Wq4c38p-Lp-Zapu.jpg",
+      "experience": "10 Years",
+      "socialIcons": ["LinkedIn", "Instagram"],
+      "availableSlots": [
+        {"day": "Monday", "time": "6:00 PM - 7:00 PM"},
+        {"day": "Thursday", "time": "7:00 AM - 8:00 AM"}
+      ],
+      "expertise": ["Pilates", "Aerobics"],
+      "details": "Experienced in Pilates and aerobics for muscle toning and flexibility."
+    },
+    {
+      "name": "Olivia Green",
+      "profileImage": "https://i.ibb.co.com/nmb82fw/beautiful-athletic-woman-smiling-fitness-trainer-gym-sportswoman-body-building-work-out-826801-5788.jpg",
+      "experience": "8 Years",
+      "socialIcons": ["Facebook", "LinkedIn"],
+      "availableSlots": [
+        {"day": "Wednesday", "time": "5:00 PM - 6:00 PM"},
+        {"day": "Sunday", "time": "10:00 AM - 11:00 AM"}
+      ],
+      "expertise": ["Yoga", "Meditation"],
+      "details": "Specialist in meditation and advanced yoga techniques for stress relief."
+    },
+    {
+      "name": "Liam Johnson",
+      "profileImage": "https://i.ibb.co.com/By36qJ1/beautiful-girl-gym-trainer-respite-resting-trainer-875224-1863.jpg",
+      "experience": "4 Years",
+      "socialIcons": ["Instagram", "Twitter"],
+      "availableSlots": [
+        {"day": "Tuesday", "time": "7:00 PM - 8:00 PM"},
+        {"day": "Friday", "time": "6:00 AM - 7:00 AM"}
+      ],
+      "expertise": ["CrossFit", "HIIT"],
+      "details": "Focuses on high-intensity interval training and strength building."
+    },
+    {
+      "name": "Sophia Martinez",
+      "profileImage": "https://i.ibb.co.com/fk50pnF/Getty-Images-1140884198-6c06c5747eae4bf4a9bbee28ec7a0623.jpg",
+      "experience": "6 Years",
+      "socialIcons": ["Facebook", "Instagram"],
+      "availableSlots": [
+        {"day": "Monday", "time": "10:00 AM - 11:00 AM"},
+        {"day": "Thursday", "time": "3:00 PM - 4:00 PM"}
+      ],
+      "expertise": ["Zumba", "Dance Fitness"],
+      "details": "Passionate about dance fitness for weight loss and fun workouts."
+    },
+    {
+      "name": "William White",
+      "profileImage": "https://i.ibb.co.com/9YWp1gc/proud-fitness-trainer-in-his-gym-confident-exercise-coach-in-the-gym-indian-fit-man-arms-crossed-bod.jpg",
+      "experience": "9 Years",
+      "socialIcons": ["LinkedIn", "Instagram"],
+      "availableSlots": [
+        {"day": "Tuesday", "time": "8:00 AM - 9:00 AM"},
+        {"day": "Saturday", "time": "4:00 PM - 5:00 PM"}
+      ],
+      "expertise": ["Personal Training", "Nutrition"],
+      "details": "Combines personal training with expert nutrition advice."
+    },
+    {
+      "name": "Mia Wilson",
+      "profileImage": "https://i.ibb.co.com/VSz1qcL/african-male-fitness-trainer-in-gym-fitness-and-wellness-african-american-coach-healthy-lifestyle-ph.jpg",
+      "experience": "2 Years",
+      "socialIcons": ["Facebook", "Twitter"],
+      "availableSlots": [
+        {"day": "Friday", "time": "2:00 PM - 3:00 PM"},
+        {"day": "Sunday", "time": "9:00 AM - 10:00 AM"}
+      ],
+      "expertise": ["Yoga", "Flexibility Training"],
+      "details": "Focuses on beginner-friendly yoga and flexibility improvement."
+    },
+    {
+      "name": "Ethan Davis",
+      "profileImage": "https://i.ibb.co.com/80R929R/bangladeshi-male-fitness-trainer-in-modern-gym-setting-promoting-health-and-exercise-photo.jpg",
+      "experience": "11 Years",
+      "socialIcons": ["LinkedIn", "Instagram"],
+      "availableSlots": [
+        {"day": "Monday", "time": "7:00 AM - 8:00 AM"},
+        {"day": "Thursday", "time": "5:00 PM - 6:00 PM"}
+      ],
+      "expertise": ["Bodybuilding", "Strength Training"],
+      "details": "Expert in bodybuilding techniques and competition preparation."
+    }
+  ]
+  
