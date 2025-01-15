@@ -6,11 +6,15 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../Components/UseAxiosPublic/useAxiosPublic";
 
 const Signup = () => {
     const navigate = useNavigate()
     const {signupUser,setUser,userInfo,userGoogleLogin} = useContext(AuthContext)
 
+    const AxiosPublic = useAxiosPublic()
+
+   // Email and passsword section start
     const handleSignupUser = (event) => {
         event.preventDefault();
         const name = event.target.name.value;
@@ -19,9 +23,7 @@ const Signup = () => {
         const password = event.target.password.value;
         const tram = event.target.tram.checked;
         
-        const userData = {
-            name,email,password,photo
-        }
+        
 
         if(password.length<6){
             return  Swal.fire({
@@ -54,20 +56,31 @@ const Signup = () => {
         signupUser(email,password)
         .then((userCredential) => {
             const user = userCredential.user
-            userInfo({ displayName: name, photoURL: photo })
             setUser(user)
-            event.target.reset();
-            navigate('/')
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Registration successful! ",
-                showConfirmButton: false,
-                timer: 1500
-              });
+            userInfo({ displayName: name, photoURL: photo })
+            .then(() => {
+              const userData = {
+                name:name,
+                email:email,
+                photo:photo
+            }
+            AxiosPublic.post('/user',userData)
+            .then((res) => {
+              if(res.data.insertedId){
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Registration successful! ",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+                event.target.reset();
+                navigate('/')
+              }
+            })
 
+            })
         })
-
         .catch((error) => {
             const errorMessage =
               error.message || "Something went wrong. Please try again.";
@@ -79,7 +92,9 @@ const Signup = () => {
           });
     }
 
+    // Email and passsword section end
 
+    // Google Login section start
     const googlelogin =() => {
         userGoogleLogin()
         .then((res) => {
@@ -98,6 +113,7 @@ const Signup = () => {
               });
         })
     }
+    // Google Login section end
   return (
     <div className="w-11/12 mx-auto my-5">
         <Link to={'/'}><button className="btn bg-[#FFA500] text-white font-semibold"><FaArrowLeft></FaArrowLeft> Back to Home</button></Link> 

@@ -15,7 +15,7 @@ const TrainerBookedPage = () => {
         "Access to gym facilities during regular operating hours",
         "Use of cardio and strength training equipment",
       ],
-      price: "$10",
+      price: 10,
     },
     {
       name: "Standard Membership",
@@ -23,7 +23,7 @@ const TrainerBookedPage = () => {
         "All benefits of the Basic Membership",
         "Access to group fitness classes such as yoga, spinning, and Zumba",
       ],
-      price: "$50",
+      price: 50,
     },
     {
       name: "Premium Membership",
@@ -32,7 +32,7 @@ const TrainerBookedPage = () => {
         "Access to personal training sessions with certified trainers",
         "Discounts on additional services such as massage therapy",
       ],
-      price: "$100",
+      price: 100,
     },
   ];
 
@@ -71,7 +71,7 @@ const TrainerBookedPage = () => {
                       ))}
                     </ul>
                   </td>
-                  <td className="border border-gray-300 p-2">{pkg.price}</td>
+                  <td className="border border-gray-300 p-2">$ {pkg.price}</td>
                   <td className="border border-gray-300 p-2">
                     <input
                       type="radio"
