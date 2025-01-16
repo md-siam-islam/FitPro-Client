@@ -16,14 +16,17 @@ import ActivityLogpage from "./DashBoard/UserDashBoardSection/ActivityLogpage/Ac
 import Profile from "./DashBoard/UserDashBoardSection/UserProfile/Profile";
 import Bookedpage from "./DashBoard/UserDashBoardSection/BookedPage/Bookedpage";
 import Newslettersubscribers from "./DashBoard/AdminPageSection/Newslettersubscribers/Newslettersubscribers";
-import AllTrainers from '../src/DashBoard/AdminPageSection/AllTrainers/AllTrainers'
-import Balance from '../src/DashBoard/AdminPageSection/Balance/Balance'
-import AppliedTrainer from '../src/DashBoard/AdminPageSection/AppliedTrainer/AppliedTrainer'
-import AddnewClass from '../src/DashBoard/AdminPageSection/AddnewClass/AddnewClass'
+import AllTrainers from "../src/DashBoard/AdminPageSection/AllTrainers/AllTrainers";
+import Balance from "../src/DashBoard/AdminPageSection/Balance/Balance";
+import AppliedTrainer from "../src/DashBoard/AdminPageSection/AppliedTrainer/AppliedTrainer";
+import AddnewClass from "../src/DashBoard/AdminPageSection/AddnewClass/AddnewClass";
 import ManageSolt from "./DashBoard/TrainerRouteSection/ManageSlots/ManageSolt";
 import AddNewSlot from "./DashBoard/TrainerRouteSection/AddNewslot/AddNewSlot";
 import AddNewForum from "./DashBoard/TrainerRouteSection/AddnewForum/AddNewForum";
 import BecomeAtrainer from "./Page/BecomeAtrainer/BecomeAtrainer";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -35,85 +38,83 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path:'/trainer',
-        element:<Trainer></Trainer>
+        path: "/trainer",
+        element: <Trainer></Trainer>,
       },
       {
-        path:'/trainerDetails/:id',
-        element:<TrainerDetails></TrainerDetails>
+        path: "/trainerDetails/:id",
+        element: <TrainerDetails></TrainerDetails>,
       },
-      // trainer booked privet route pore korbo 
+      // trainer booked privet route pore korbo
       {
-        path:'/trainerbooked/:trainername/:solt/:expertise',
-        element:<TrainerBookedPage></TrainerBookedPage>
+        path: "/trainerbooked/:trainername/:solt/:expertise",
+        element: <TrainerBookedPage></TrainerBookedPage>,
       },
       {
         path: "/classes",
         element: <AllClasses></AllClasses>,
       },
       {
-        path:'/becometrainer',
-        element:<BecomeAtrainer></BecomeAtrainer>
-      }
+        path: "/becometrainer",
+        element: <BecomeAtrainer></BecomeAtrainer>,
+      },
     ],
   },
   {
-    path:'/dashboard',
-    element:<DashBoard></DashBoard>,
-    children:[
+    path: "/dashboard",
+    element: <DashBoard></DashBoard>,
+    children: [
       {
-        path:'activity',
-        element:<ActivityLogpage></ActivityLogpage>
+        path: "activity",
+        element: <ActivityLogpage></ActivityLogpage>,
       },
       {
-        path:'profile',
-        element:<Profile></Profile>
+        path: "profile",
+        element: <Profile></Profile>,
       },
       {
-        path:'booked',
-        element:<Bookedpage></Bookedpage>
+        path: "booked",
+        element: <Bookedpage></Bookedpage>,
       },
 
       // admin dashboard route
 
       {
-        path:'newsletter',
-        element:<Newslettersubscribers></Newslettersubscribers>
+        path: "newsletter",
+        element: <Newslettersubscribers></Newslettersubscribers>,
       },
       {
-        path:'alltrainer',
-        element:<AllTrainers></AllTrainers>
+        path: "alltrainer",
+        element: <AllTrainers></AllTrainers>,
       },
       {
-        path:'balance',
-        element:<Balance></Balance>
+        path: "balance",
+        element: <Balance></Balance>,
       },
       {
-        path:'appliedtrainer',
-        element:<AppliedTrainer></AppliedTrainer>
+        path: "appliedtrainer",
+        element: <AppliedTrainer></AppliedTrainer>,
       },
       {
-        path:'addnewclass',
-        element:<AddnewClass></AddnewClass>
+        path: "addnewclass",
+        element: <AddnewClass></AddnewClass>,
       },
       // admin route end
 
       // Trainer route stat
       {
-        path:'manageSlot',
-        element:<ManageSolt></ManageSolt>
+        path: "manageSlot",
+        element: <ManageSolt></ManageSolt>,
       },
       {
-        path:"addnewsolt",
-        element:<AddNewSlot></AddNewSlot>
+        path: "addnewsolt",
+        element: <AddNewSlot></AddNewSlot>,
       },
       {
-        path:"addnewporum",
-        element:<AddNewForum></AddNewForum>
-      }
-
-
-    ]
+        path: "addnewporum",
+        element: <AddNewForum></AddNewForum>,
+      },
+    ],
   },
   {
     path: "/signup",
@@ -129,7 +130,9 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <div className="font-font">
       <AuthProvider>
-        <RouterProvider router={router} />
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
       </AuthProvider>
     </div>
   </StrictMode>

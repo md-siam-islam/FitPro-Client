@@ -46,7 +46,6 @@ const BecomeAtrainer = () => {
       },
     });
   
-    // Assuming the uploaded image URL is returned in the response data
     trainerData.profileImage = imgUploadResponse.data.data.display_url;
   
     console.log(trainerData);

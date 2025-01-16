@@ -1,13 +1,14 @@
 
 import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-
 import UserDashBoard from "./UserDashboard/UserDashBoard";
 import AdminDashBoard from "./AdminDashBOard/AdminDashBoard";
+import useAdmin from "../Hook/UseAdmin/useAdmin";
 
-const admin = true
+
 
 const DashBoard = () => {
+  const [isAdmin] = useAdmin()
   return (
     <div className="flex gap-8 w-11/12 mx-auto">
       <div className=" className='w-64 min-h-screen px-5 py-8 bg-gray-800">
@@ -18,7 +19,7 @@ const DashBoard = () => {
         <div className="">
 
             {
-                admin? <AdminDashBoard></AdminDashBoard> : <UserDashBoard></UserDashBoard> 
+                isAdmin? <AdminDashBoard></AdminDashBoard> : <UserDashBoard></UserDashBoard> 
             }
             
         </div>
