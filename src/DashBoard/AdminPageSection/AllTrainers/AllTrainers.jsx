@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Components/UseAxiosPublic/useAxiosPublic";
+import { Helmet } from "react-helmet";
 
 const AllTrainers = () => {
   const AxiosPublic = useAxiosPublic();
@@ -13,6 +14,9 @@ const AllTrainers = () => {
   });
   return (
     <div>
+        <Helmet>
+            <title>Dashboard || All Trainer</title>
+        </Helmet>
         <h1 className="text-2xl md:text-4xl font-bold border-y-2 text-center mb-5">All Trainers Page</h1>
       <div className="overflow-x-auto">
         <table className="table">

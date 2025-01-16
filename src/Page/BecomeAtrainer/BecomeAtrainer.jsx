@@ -5,6 +5,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useAxiosPublic from "../../Components/UseAxiosPublic/useAxiosPublic";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const BecomeAtrainer = () => {
     const imageKey = "6f830635465660e6fbef1d712018f776"
@@ -83,6 +84,11 @@ const BecomeAtrainer = () => {
   };
   return (
     <div className="bg-white shadow-xl my-8 py-5 rounded">
+      <Helmet>
+        <title>
+          All Trainer || Be a Trainer
+        </title>
+      </Helmet>
       <h1 className="text-center font-semibold underline">Be A Trainer Form</h1>
       <div className="w-9/12 mx-auto flex flex-col gap-4">
         <form onSubmit={handleSubmit(onSubmit)}>
