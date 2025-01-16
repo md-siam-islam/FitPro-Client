@@ -3,15 +3,19 @@ import { useForm } from "react-hook-form";
 import Select from "react-select";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useAxiosPublic from "../../Components/UseAxiosPublic/useAxiosPublic";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const BecomeAtrainer = () => {
     const imageKey = "6f830635465660e6fbef1d712018f776"
     const img_hosting_api_key = `https://api.imgbb.com/1/upload?key=${imageKey}`
     const AxiosPublic = useAxiosPublic()
+    const navigate = useNavigate()
   const { user } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
+    reset,
     watch,
     formState: { errors },
   } = useForm();
@@ -48,9 +52,34 @@ const BecomeAtrainer = () => {
   
     trainerData.profileImage = imgUploadResponse.data.data.display_url;
   
-    console.log(trainerData);
-  
-    // এখানে API কল করে trainerData সার্ভারে পাঠানোর জন্য কোড লিখুন
+    if(imgUploadResponse.data.success){
+      const ApplyTrainerInfo = {
+        trainerid:user._id,
+        image:imgUploadResponse.data.data.display_url,
+        name:formData.name,
+        email:user.email,
+        Age:formData.age,
+        skills: formData.skills,
+        availableDays: formData.availableDays,
+        availableTime: formData.availableTime,
+        status: "pending"
+      }
+
+      AxiosPublic.post('/trainer',ApplyTrainerInfo)
+      .then((res) => {
+        reset()
+        if(res.data.insertedId){
+          navigate('/')
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Trainer Request Successfull",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      })
+    }
   };
   return (
     <div className="bg-white shadow-xl my-8 py-5 rounded">
@@ -94,7 +123,7 @@ const BecomeAtrainer = () => {
           {errors.age && <p className="text-red-500 text-sm">Age is required</p>}
 
           {/* Profile Image */}
-          <label className="label">
+          {/* <label className="label">
             <span className="label-text">Profile Image</span>
           </label>
           <input
@@ -103,7 +132,7 @@ const BecomeAtrainer = () => {
             placeholder="Enter Image URL"
             className="input input-bordered w-full"
           />
-          {errors.profileImage && <p className="text-red-500 text-sm">Profile Image is required</p>}
+          {errors.profileImage && <p className="text-red-500 text-sm">Profile Image is required</p>} */}
 
           {/* Skills */}
           <label className="label">
@@ -156,7 +185,7 @@ const BecomeAtrainer = () => {
            <label className="label">
             <span className="label-text">Profile Image</span>
           </label>
-          <div className="my-6">
+          <div className="mb-6">
           <input {...register("image")} type="file" className="file-input w-full max-w-xs" />
           </div>
 

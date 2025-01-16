@@ -25,6 +25,7 @@ import AddNewSlot from "./DashBoard/TrainerRouteSection/AddNewslot/AddNewSlot";
 import AddNewForum from "./DashBoard/TrainerRouteSection/AddnewForum/AddNewForum";
 import BecomeAtrainer from "./Page/BecomeAtrainer/BecomeAtrainer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Privetroute from "./PrivetRoute/Privetroute";
 
 const queryClient = new QueryClient();
 
@@ -48,7 +49,7 @@ const router = createBrowserRouter([
       // trainer booked privet route pore korbo
       {
         path: "/trainerbooked/:trainername/:solt/:expertise",
-        element: <TrainerBookedPage></TrainerBookedPage>,
+        element: <Privetroute><TrainerBookedPage></TrainerBookedPage></Privetroute>,
       },
       {
         path: "/classes",
@@ -56,7 +57,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/becometrainer",
-        element: <BecomeAtrainer></BecomeAtrainer>,
+        element: <Privetroute><BecomeAtrainer></BecomeAtrainer></Privetroute>,
       },
     ],
   },
