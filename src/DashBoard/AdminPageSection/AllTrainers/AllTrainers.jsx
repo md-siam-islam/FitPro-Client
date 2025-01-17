@@ -38,7 +38,7 @@ const AllTrainers = () => {
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
                         <img
-                          src={trainer.profileImage}
+                          src={trainer.profileImage ? trainer.profileImage : trainer.image }
                           alt="Avatar Tailwind CSS Component"
                         />
                       </div>

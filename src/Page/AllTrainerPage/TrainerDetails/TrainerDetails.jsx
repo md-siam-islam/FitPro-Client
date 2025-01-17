@@ -19,10 +19,21 @@ const TrainerDetails = () => {
     return <div>Loading...</div>;
   }
 
+  // Default values for missing data
+  const profileImage = details.profileImage || details.image || "https://via.placeholder.com/150";
+  const experience = details.experience || "N/A";
+  const expertise = details.expertise?.join(", ") || "General Fitness";
+  const detailsText = details.details || "No details available.";
+  const socialIcons = details.socialIcons || ["Facebook", "Twitter"];
+  const availableSlots = details.availableSlots || [
+    { day: "Tuesday", time: "6:00 AM - 7:00 AM" },
+    { day: "Friday", time: "4:00 PM - 5:00 PM" },
+  ];
+
   return (
     <div>
       <Helmet>
-        <title>FitPro | {details.name} Details page </title>
+        <title>FitPro | {details.name} Details Page</title>
       </Helmet>
       <h1 className="text-3xl font-bold my-5 text-center underline">
         {details.name} Details Page
@@ -32,21 +43,20 @@ const TrainerDetails = () => {
         <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
           <div className="flex flex-col md:flex-row items-center">
             <img
-              src={details.profileImage}
+              src={profileImage}
               alt={details.name}
               className="w-48 h-48 object-cover rounded-full mb-4 md:mb-0 md:mr-6"
             />
             <div>
               <h1 className="text-3xl font-bold mb-2">{details.name}</h1>
               <p className="mb-2">
-                <strong>Experience:</strong> {details.experience}
-              </p>
+                <strong>Experience:</strong> {experience ? experience : '3 years'} </p>
               <p className="mb-2">
-                <strong>Expertise:</strong> {details.expertise?.join(", ")}
+                <strong>Expertise:</strong> {expertise}
               </p>
-              <p className="mb-4">{details.details}</p>
+              <p className="mb-4">{detailsText}</p>
               <div className="flex gap-4">
-                {details.socialIcons?.map((icon, index) => (
+                {socialIcons.map((icon, index) => (
                   <a
                     key={index}
                     href={`https://www.${icon.toLowerCase()}.com`}
@@ -66,12 +76,12 @@ const TrainerDetails = () => {
         <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
           <h2 className="text-2xl font-bold mb-4">Available Slots</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {details.availableSlots?.map((slot, index) => (
+            {availableSlots.map((slot, index) => (
               <Link
                 key={index}
                 to={`/trainerbooked/${details.name}/${slot.day}-${
                   slot.time
-                }/${details.expertise.join(",")}`}
+                }/${details.expertise?.join(",") || "General Fitness"}`}
               >
                 <button className="btn btn-outline bg-[#FFA500] w-full">
                   {slot.day}, {slot.time}
@@ -88,13 +98,9 @@ const TrainerDetails = () => {
             If you are passionate about training and helping others achieve
             their goals, join our team of expert trainers.
           </p>
-         <Link to={"/becometrainer"}>
-         <button
-            className="btn bg-[#FFA500]"
-          >
-            Become a Trainer
-          </button>
-         </Link>
+          <Link to={"/becometrainer"}>
+            <button className="btn bg-[#FFA500]">Become a Trainer</button>
+          </Link>
         </div>
       </div>
     </div>

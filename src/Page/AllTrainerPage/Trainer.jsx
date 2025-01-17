@@ -54,7 +54,7 @@ const Trainer = () => {
           >
             <figure>
               <img
-                src={trainer.profileImage}
+                src={trainer.profileImage ? trainer.profileImage : trainer.image }
                 alt={trainer.name}
                 className="w-full h-48 object-cover"
               />

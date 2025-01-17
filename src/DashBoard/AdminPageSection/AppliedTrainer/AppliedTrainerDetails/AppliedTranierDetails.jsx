@@ -19,50 +19,37 @@ const AppliedTrainerDetails = () => {
     });
 
     // Handle confirm button click
-    const handleConfirm = async () => {
-        try {
-            const res = await AxiosPublic.patch(`/trainer/confirm/${id}`, { status: "approved" });
-            if (res.data.modifiedCount > 0) {
+    const handleConfirm = async (id) => {
+
+        try{
+            const res = await AxiosPublic.put(`/create-trainer/${id}`)
+            if (res.data) {
+                refetch()
                 Swal.fire({
-                    icon: "success",
-                    title: "Trainer confirmed successfully!",
-                    showConfirmButton: false,
-                    timer: 1500,
+                  icon: "success",
+                  title: "Trainer Approved!",
+                  text: `${res.data.trainer.name} is now a trainer.`,
+                  confirmButtonText: "OK",
                 });
-                refetch(); // Update the trainer data
-                navigate("/admin/applied-trainers"); // Redirect to applied trainers page
-            }
-        } catch (error) {
-            console.error("Error confirming trainer:", error);
+                
+                navigate('/dashboard/alltrainer')
+              }
+
+        }catch(error){
+            console.error("Error approving trainer:", error);
             Swal.fire({
-                icon: "error",
-                title: "Failed to confirm trainer!",
-                text: error.message,
+              icon: "error",
+              title: "Error!",
+              text: "Something went wrong while approving the trainer.",
+              confirmButtonText: "OK",
             });
         }
+       
     };
 
     // Handle reject button click
     const handleReject = async () => {
-        try {
-            const res = await AxiosPublic.delete(`/trainer/reject/${id}`);
-            if (res.data.deletedCount > 0) {
-                Swal.fire({
-                    icon: "success",
-                    title: "Trainer rejected successfully!",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                navigate("/admin/applied-trainers"); // Redirect to applied trainers page
-            }
-        } catch (error) {
-            console.error("Error rejecting trainer:", error);
-            Swal.fire({
-                icon: "error",
-                title: "Failed to reject trainer!",
-                text: error.message,
-            });
-        }
+       
     };
 
     return (
@@ -87,7 +74,7 @@ const AppliedTrainerDetails = () => {
                 </div>
                 <div className="flex justify-center gap-4 mt-6">
                     <button
-                        onClick={handleConfirm}
+                        onClick={ () => handleConfirm(trainer._id)}
                         className="btn btn-success"
                     >
                         Confirm

@@ -55,14 +55,15 @@ const BecomeAtrainer = () => {
   
     if(imgUploadResponse.data.success){
       const ApplyTrainerInfo = {
-        trainerid:user._id,
-        image:imgUploadResponse.data.data.display_url,
+        profileImage:imgUploadResponse.data.data.display_url,
         name:formData.name,
         email:user.email,
         Age:formData.age,
-        skills: formData.skills,
-        availableDays: formData.availableDays,
+        experience:formData.experience,
+        expertise: formData.skills,
+        availableDays: selectedDays.map((day) => day.value),
         availableTime: formData.availableTime,
+        details:formData.details,
         status: "pending"
       }
 
@@ -80,6 +81,7 @@ const BecomeAtrainer = () => {
           });
         }
       })
+      console.log(ApplyTrainerInfo);
     }
   };
   return (
@@ -128,17 +130,17 @@ const BecomeAtrainer = () => {
           />
           {errors.age && <p className="text-red-500 text-sm">Age is required</p>}
 
-          {/* Profile Image */}
-          {/* <label className="label">
-            <span className="label-text">Profile Image</span>
+          {/* experience */}
+          <label className="label">
+            <span className="label-text">Experience</span>
           </label>
           <input
-            {...register("profileImage", { required: true })}
-            type="text"
-            placeholder="Enter Image URL"
+            {...register("experience", { required: true })}
+            type="number"
+            placeholder="Enter Your Experience"
             className="input input-bordered w-full"
           />
-          {errors.profileImage && <p className="text-red-500 text-sm">Profile Image is required</p>} */}
+          {errors.experience && <p className="text-red-500 text-sm">experience is required</p>}
 
           {/* Skills */}
           <label className="label">
@@ -187,6 +189,15 @@ const BecomeAtrainer = () => {
           {errors.availableTime && (
             <p className="text-red-500 text-sm">Available time is required</p>
           )}
+           <label className="label">
+            <span className="label-text">Details</span>
+          </label>
+          <input
+            {...register("details", { required: true })}
+            type="text"
+             placeholder="Enter Details"
+            className="input input-bordered w-full"
+          />
 
            <label className="label">
             <span className="label-text">Profile Image</span>
