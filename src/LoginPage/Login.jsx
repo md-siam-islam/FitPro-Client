@@ -114,7 +114,7 @@ const Login = () => {
 
             <div className="form-control mt-6 w-full">
               <button className="btn bg-[#FFA500] w-full p-4 rounded-lg">
-                Sign Up
+                Login
               </button>
             </div>
             <div className="divider">OR</div>

@@ -3,9 +3,12 @@ import { NavLink } from "react-router-dom";
 import UserDashBoard from "./UserDashboard/UserDashBoard";
 import AdminDashBoard from "./AdminDashBOard/AdminDashBoard";
 import useAdmin from "../Hook/UseAdmin/useAdmin";
+import useTrainer from "../Hook/Usetrainer/useTrainer";
+import TrainerDashBoard from "./TrainerDashBoard/TrainerDashBoard";
 
 const DashBoard = () => {
   const [isAdmin] = useAdmin();
+  const [isTrainer] = useTrainer()
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 w-full lg:w-11/12 mx-auto">
@@ -18,7 +21,17 @@ const DashBoard = () => {
         </div>
 
         <div>
-          {isAdmin ? <AdminDashBoard /> : <UserDashBoard />}
+          
+        <div>
+          {/* Admin Dashboard */}
+          {isAdmin && <AdminDashBoard />}
+          
+          {/* Trainer Dashboard */}
+          {!isAdmin && isTrainer && <TrainerDashBoard />}
+          
+          {/* User Dashboard */}
+          {!isAdmin && !isTrainer && <UserDashBoard />}
+        </div>
         </div>
 
         <div className="px-6 mt-6">
