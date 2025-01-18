@@ -4,16 +4,16 @@ import useAxiosPublic from '../UseAxiosPublic/useAxiosPublic';
 const TeamSection = () => {
     const AxiosPublic = useAxiosPublic();
 
-    const [trainers, setTrainers] = useState([]); // State-এর ডিফল্ট ভ্যালু একটি খালি অ্যারে দিন
+    const [trainers, setTrainers] = useState([]); 
 
     useEffect(() => {
-        // API কল
-        AxiosPublic.get('/trainer?limit=3') // Route এর নাম সঠিক করা হয়েছে
+        
+        AxiosPublic.get('/trainer?limit=3') 
             .then((res) => {
-                setTrainers(res.data); // ডাটা state-এ সেট করা
+                setTrainers(res.data); 
             })
             .catch((error) => {
-                console.error('Error fetching trainers:', error); // কোনো ত্রুটি হলে লগ করা
+                console.error('Error fetching trainers:', error); 
             });
     }, []);
 

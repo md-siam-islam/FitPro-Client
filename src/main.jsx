@@ -28,6 +28,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Privetroute from "./PrivetRoute/Privetroute";
 import AppliedTranierDetails from "./DashBoard/AdminPageSection/AppliedTrainer/AppliedTrainerDetails/AppliedTranierDetails";
 import ProfileUpdate from "./UpdateProfile/ProfileUpdate";
+import ErrorPage from "./Components/ErrorPage/ErrorPage";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Homelayout></Homelayout>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -65,6 +67,7 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashBoard></DashBoard>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: "activity",
