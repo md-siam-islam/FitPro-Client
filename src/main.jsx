@@ -47,7 +47,6 @@ const router = createBrowserRouter([
         path: "/trainerDetails/:id",
         element: <TrainerDetails></TrainerDetails>,
       },
-      // trainer booked privet route pore korbo
       {
         path: "/trainerbooked/:trainername/:solt/:expertise",
         element: <Privetroute><TrainerBookedPage></TrainerBookedPage></Privetroute>,

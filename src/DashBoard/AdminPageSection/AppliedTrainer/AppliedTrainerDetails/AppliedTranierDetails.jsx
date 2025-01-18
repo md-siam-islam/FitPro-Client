@@ -3,17 +3,19 @@ import useAxiosPublic from "../../../../Components/UseAxiosPublic/useAxiosPublic
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { FaArrowLeft } from "react-icons/fa";
+import useAxiosSecure from "../../../../Hook/UseAxiosSecure/useAxiosSecure";
 
 const AppliedTrainerDetails = () => {
-  const { id } = useParams(); // Get Trainer ID from URL params
+  const { id } = useParams();
   const AxiosPublic = useAxiosPublic();
+  const AxiosSecure = useAxiosSecure()
   const navigate = useNavigate();
 
-  // Fetch trainer details by ID
   const { data: trainer = {}, refetch } = useQuery({
     queryKey: ["trainer", id],
     queryFn: async () => {
-      const res = await AxiosPublic.get(`/trainer/${id}`);
+      const res = await AxiosPublic.get(`/allTrainer/${id}`);
+      
       return res.data;
     },
   });
@@ -21,7 +23,7 @@ const AppliedTrainerDetails = () => {
   // Handle confirm button click
   const handleConfirm = async (id) => {
     try {
-      const res = await AxiosPublic.put(`/create-trainer/${id}`);
+      const res = await AxiosSecure.put(`/create-trainer/${id}`);
       if (res.data) {
         refetch();
         Swal.fire({
@@ -78,9 +80,6 @@ const AppliedTrainerDetails = () => {
   };
   
 
-  // Handle reject button click
-  const handleReject = async () => {};
-
   return (
     <div className="w-10/12 mx-auto mt-10">
       <Link to={"/dashboard/appliedtrainer"} className="btn bg-[#FFA500] mb-4">
@@ -98,7 +97,7 @@ const AppliedTrainerDetails = () => {
         <div className="mt-4 text-center">
           <h2 className="text-xl font-semibold">Name: {trainer.name}</h2>
           <p>Email: {trainer.email}</p>
-          <p>Age: {trainer.Age}</p>
+          <p>Age: {trainer.age}</p>
           <p>Expertise: {trainer.expertise?.join(", ")}</p>
           <p>Available Time: {trainer.availableTime}am</p>
           <p>

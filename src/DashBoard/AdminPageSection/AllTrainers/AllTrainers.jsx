@@ -1,9 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Components/UseAxiosPublic/useAxiosPublic";
 import { Helmet } from "react-helmet";
+import { useContext } from "react";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const AllTrainers = () => {
   const AxiosPublic = useAxiosPublic();
+  const {user} = useContext(AuthContext)
 
   const { data: trainers = [], refetch } = useQuery({
     queryKey: ["trainer"],
@@ -12,6 +16,47 @@ const AllTrainers = () => {
       return res.data.filter((trainer) => trainer.role === "trainer"); // Filter by role
     },
   });
+
+  const handleDeleteTrainer = (id) =>{
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        AxiosPublic.delete(`/delete-trainer/${id}`)
+        .then((res) => {
+          if(res.data.deletedCount>0){
+            refetch()
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success"
+            });
+          }else {
+            Swal.fire({
+              title: "Failed!",
+              text: "Could not delete the trainer.",
+              icon: "error",
+            });
+          }
+        })
+        .catch((error) => {
+          console.error("Error deleting trainer:", error);
+          Swal.fire({
+            title: "Error!",
+            text: "Something went wrong. Please try again later.",
+            icon: "error",
+          });
+        });
+        
+      }
+    });
+  }
   return (
     <div>
         <Helmet>
@@ -52,7 +97,7 @@ const AllTrainers = () => {
                 <td>{trainer.experience}</td>
                 <th>
                   <button
-                    onClick={() => handleDeleteTrainer(trainer._id)}
+                    onClick={() =>handleDeleteTrainer(trainer._id)}
                     className="bg-[#FFA500] text-white px-3 py-1 rounded hover:bg-red-600"
                   >
                     Delete Trainer

@@ -6,18 +6,19 @@ import useAxiosPublic from "../../Components/UseAxiosPublic/useAxiosPublic";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import useImagebb, { useAxiosBB } from "../../Imagebb/useImagebb";
 
 const BecomeAtrainer = () => {
     const imageKey = "6f830635465660e6fbef1d712018f776"
     const img_hosting_api_key = `https://api.imgbb.com/1/upload?key=${imageKey}`
     const AxiosPublic = useAxiosPublic()
+    const useAxiosBB = useImagebb()
     const navigate = useNavigate()
   const { user } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     reset,
-    watch,
     formState: { errors },
   } = useForm();
   
@@ -33,57 +34,51 @@ const BecomeAtrainer = () => {
   ];
 
   const onSubmit = async (formData) => {
-    const trainerData = {
-      ...formData,
-      availableDays: selectedDays.map((day) => day.value),
-      status: "pending",
-    };
-  
     if (!formData.image || !formData.image[0]) {
       console.log("Image not found");
       return;
     }
+    
+    const imgFile = new FormData();
+    imgFile.append('image', formData.image[0]);
+    
+    try {
+      const imgUploadResponse = await useAxiosBB.post(img_hosting_api_key, imgFile, {
+        headers: {
+          'Content-Type': 'multipart/form-data', 
+        },
+      });
   
-    const imgFile = { image: formData.image[0] };
-    const imgUploadResponse = await AxiosPublic.post(img_hosting_api_key, imgFile, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+      if (imgUploadResponse.data.success) {
+        const trainerData = {
+          profileImage: imgUploadResponse.data.data.display_url,
+          name: formData.name,
+          email: user.email,
+          age: formData.age,
+          experience: formData.experience,
+          expertise: formData.skills,
+          availableDays: selectedDays.map(day => day.value),
+          availableTime: formData.availableTime,
+          details: formData.details,
+          status: 'pending',
+        };
   
-    trainerData.profileImage = imgUploadResponse.data.data.display_url;
-  
-    if(imgUploadResponse.data.success){
-      const ApplyTrainerInfo = {
-        profileImage:imgUploadResponse.data.data.display_url,
-        name:formData.name,
-        email:user.email,
-        Age:formData.age,
-        experience:formData.experience,
-        expertise: formData.skills,
-        availableDays: selectedDays.map((day) => day.value),
-        availableTime: formData.availableTime,
-        details:formData.details,
-        status: "pending"
+        await AxiosPublic.post('/trainer', trainerData);
+        reset();
+        navigate('/');
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Trainer Request Successful',
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
-
-      AxiosPublic.post('/trainer',ApplyTrainerInfo)
-      .then((res) => {
-        reset()
-        if(res.data.insertedId){
-          navigate('/')
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Trainer Request Successfull",
-            showConfirmButton: false,
-            timer: 1500
-          });
-        }
-      })
-      console.log(ApplyTrainerInfo);
+    } catch (error) {
+      console.error('Error uploading image:', error);
     }
   };
+  
   return (
     <div className="bg-white shadow-xl my-8 py-5 rounded">
       <Helmet>

@@ -4,11 +4,9 @@ import axios from "axios";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import useAxiosSecure from "../../Hook/UseAxiosSecure/useAxiosSecure";
 import useAxiosPublic from "../../Components/UseAxiosPublic/useAxiosPublic";
 const Trainer = () => {
   const [trainers, setTrainers] = useState([]);
-  const AxiosSecure = useAxiosSecure()
   const AxiosPublic = useAxiosPublic()
 
   useEffect(() => {

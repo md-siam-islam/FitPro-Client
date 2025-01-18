@@ -1,108 +1,113 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import React from "react";
+import { Link, useParams } from "react-router-dom";
 import useAxiosPublic from "../../../Components/UseAxiosPublic/useAxiosPublic";
 import { Helmet } from "react-helmet";
+import { useQuery } from "@tanstack/react-query";
 
 const TrainerDetails = () => {
-  const [details, setDetails] = useState(null);
   const { id } = useParams();
   const AxiosPublic = useAxiosPublic();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    AxiosPublic.get(`/trainer/${id}`)
-      .then((res) => setDetails(res.data))
-      .catch((err) => console.error(err));
-  }, [id, AxiosPublic]);
+  // Fetch trainer details using react-query
+  const { data: trainerDetails = {} } = useQuery({
+    queryKey: ["trainerDetails", id],
+    queryFn: async () => {
+      const res = await AxiosPublic.get(`/allTrainer/${id}`);
+      return res.data;
+    },
+  });
 
-  if (!details) {
-    return <div>Loading...</div>;
-  }
-
-  // Default values for missing data
-  const profileImage = details.profileImage || details.image || "https://via.placeholder.com/150";
-  const experience = details.experience || "N/A";
-  const expertise = details.expertise?.join(", ") || "General Fitness";
-  const detailsText = details.details || "No details available.";
-  const socialIcons = details.socialIcons || ["Facebook", "Twitter"];
-  const availableSlots = details.availableSlots || [
-    { day: "Tuesday", time: "6:00 AM - 7:00 AM" },
-    { day: "Friday", time: "4:00 PM - 5:00 PM" },
-  ];
+  // Destructuring trainer details
+  const {
+    name,
+    profileImage,
+    experience,
+    expertise,
+    socialIcons,
+    availableSlots,
+    details,
+  } = trainerDetails;
 
   return (
     <div>
       <Helmet>
-        <title>FitPro | {details.name} Details Page</title>
+        <title>FitPro | {name ? `${name} Details` : "Details Page"}</title>
       </Helmet>
-      <h1 className="text-3xl font-bold my-5 text-center underline">
-        {details.name} Details Page
+
+      {/* Page Title */}
+      <h1 className="text-center text-3xl font-bold underline mb-5">
+        {name ? `${name} Details Page` : "Trainer Details"}
       </h1>
-      <div className="p-5 bg-gray-100">
-        {/* Trainer Information Section */}
-        <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
-          <div className="flex flex-col md:flex-row items-center">
-            <img
-              src={profileImage}
-              alt={details.name}
-              className="w-48 h-48 object-cover rounded-full mb-4 md:mb-0 md:mr-6"
-            />
-            <div>
-              <h1 className="text-3xl font-bold mb-2">{details.name}</h1>
-              <p className="mb-2">
-                <strong>Experience:</strong> {experience ? experience : '3 years'} </p>
-              <p className="mb-2">
-                <strong>Expertise:</strong> {expertise}
-              </p>
-              <p className="mb-4">{detailsText}</p>
-              <div className="flex gap-4">
-                {socialIcons.map((icon, index) => (
-                  <a
-                    key={index}
-                    href={`https://www.${icon.toLowerCase()}.com`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#FFA500] hover:underline"
-                  >
-                    {icon}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
+
+      {/* Trainer Details */}
+      <div className="flex flex-col lg:flex-row items-start gap-8 p-5 bg-gray-100 rounded-lg shadow-md">
+        {/* Profile Image */}
+        <div className="flex-shrink-0">
+          <img
+            className="w-64 h-64 rounded-xl object-cover"
+            src={profileImage}
+            alt={name}
+          />
         </div>
 
-        {/* Available Slots Section */}
-        <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
-          <h2 className="text-2xl font-bold mb-4">Available Slots</h2>
+        {/* Trainer Info */}
+        <div className="flex-grow">
+          <h2 className="text-2xl font-semibold mb-3">Name: {name}</h2>
+          <p className="text-lg mb-2">
+            <strong>Experience:</strong> {experience || "Not Available"}
+          </p>
+          <p className="text-lg mb-2">
+            <strong>Expertise:</strong> {expertise?.join(", ") || "General"}
+          </p>
+          <p className="text-md text-gray-700 mb-4">{details}</p>
+
+          {/* Social Icons */}
+          {socialIcons && (
+            <div className="flex gap-4">
+              {socialIcons.map((icon, index) => (
+                <a
+                  key={index}
+                  href={`https://www.${icon.toLowerCase()}.com`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline hover:text-blue-700"
+                >
+                  {icon}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Available Slots */}
+      {availableSlots && availableSlots.length > 0 && (
+        <div className="mt-8 p-5 bg-white rounded-lg shadow-lg">
+          <h3 className="text-xl font-bold mb-4">Available Slots</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {availableSlots.map((slot, index) => (
-              <Link
-                key={index}
-                to={`/trainerbooked/${details.name}/${slot.day}-${
-                  slot.time
-                }/${details.expertise?.join(",") || "General Fitness"}`}
-              >
-                <button className="btn btn-outline bg-[#FFA500] w-full">
-                  {slot.day}, {slot.time}
-                </button>
-              </Link>
+              <Link to={`/trainerbooked/${name}/${slot.day}-${slot.time}/${expertise.join(",")}`}><button
+              key={index}
+              className="btn btn-outline bg-orange-500 text-white rounded-md px-4 py-2"
+            >
+              {slot.day}, {slot.time}
+            </button></Link>
             ))}
           </div>
         </div>
+      )}
 
-        {/* Be A Trainer Section */}
-        <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-          <h2 className="text-2xl font-bold mb-4">Interested in Joining Us?</h2>
-          <p className="mb-4">
-            If you are passionate about training and helping others achieve
-            their goals, join our team of expert trainers.
-          </p>
-          <Link to={"/becometrainer"}>
-            <button className="btn bg-[#FFA500]">Become a Trainer</button>
-          </Link>
-        </div>
+      <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+        <h2 className="text-2xl font-bold mb-4">Interested in Joining Us?</h2>
+        <p className="mb-4">
+          If you are passionate about training and helping others achieve their
+          goals, join our team of expert trainers.
+        </p>
+        <Link to={"/becometrainer"}>
+          <button className="btn bg-[#FFA500]">Become a Trainer</button>
+        </Link>
       </div>
+      
     </div>
   );
 };

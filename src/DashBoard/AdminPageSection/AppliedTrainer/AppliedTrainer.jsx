@@ -10,7 +10,7 @@ const AppliedTrainer = () => {
     queryKey: ["trainer"],
     queryFn: async () => {
       const res = await AxiosPublic.get("/trainer");
-      return res.data.filter((trainer) => trainer.status === "pending"); // Filter by status
+      return res.data.filter((trainer) => trainer.status === "pending");
     },
   });
   return (

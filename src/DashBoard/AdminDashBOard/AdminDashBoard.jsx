@@ -62,7 +62,7 @@ const AdminDashBoard = () => {
         </li>
         <li>
           <NavLink
-            to={"/dashboard/booked"}
+            to={"/dashboard/addnewclass"}
             className={({ isActive }) =>
               `block py-3 px-6 rounded ${
                 isActive
