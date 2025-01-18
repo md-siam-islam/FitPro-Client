@@ -3,7 +3,7 @@ import React from 'react';
 const ManageSolt = () => {
     return (
         <div>
-           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione impedit labore incidunt quisquam sint alias maiores sapiente. Omnis, ad dolorum!
+            This Is a Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt ratione velit nulla, esse accusantium inventore impedit incidunt rem obcaecati unde?
         </div>
     );
 };

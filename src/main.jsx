@@ -27,6 +27,7 @@ import BecomeAtrainer from "./Page/BecomeAtrainer/BecomeAtrainer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Privetroute from "./PrivetRoute/Privetroute";
 import AppliedTranierDetails from "./DashBoard/AdminPageSection/AppliedTrainer/AppliedTrainerDetails/AppliedTranierDetails";
+import ProfileUpdate from "./UpdateProfile/ProfileUpdate";
 
 const queryClient = new QueryClient();
 
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile></Profile>,
+      },
+      {
+        path:'updateprofile',
+        element:<ProfileUpdate></ProfileUpdate>
       },
       {
         path: "booked",
