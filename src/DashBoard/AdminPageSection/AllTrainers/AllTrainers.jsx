@@ -30,13 +30,14 @@ const AllTrainers = () => {
       if (result.isConfirmed) {
         AxiosPublic.delete(`/delete-trainer/${id}`)
         .then((res) => {
-          if(res.data.deletedCount>0){
-            refetch()
+          // console.log(res?.data)
+          if(res?.data?.TrainDelete?.deletedCount>0){
             Swal.fire({
               title: "Deleted!",
               text: "Your file has been deleted.",
               icon: "success"
             });
+            refetch()
           }else {
             Swal.fire({
               title: "Failed!",
@@ -94,7 +95,7 @@ const AllTrainers = () => {
                   {trainer.name}
                 </td>
                 <td>{trainer.role}</td>
-                <td>{trainer.experience}</td>
+                <td>{trainer.experience} Year</td>
                 <th>
                   <button
                     onClick={() =>handleDeleteTrainer(trainer._id)}

@@ -9,11 +9,11 @@ import { Helmet } from "react-helmet";
 import useImagebb, { useAxiosBB } from "../../Imagebb/useImagebb";
 
 const BecomeAtrainer = () => {
-    const imageKey = "6f830635465660e6fbef1d712018f776"
-    const img_hosting_api_key = `https://api.imgbb.com/1/upload?key=${imageKey}`
-    const AxiosPublic = useAxiosPublic()
-    const useAxiosBB = useImagebb()
-    const navigate = useNavigate()
+  const imageKey = "6f830635465660e6fbef1d712018f776";
+  const img_hosting_api_key = `https://api.imgbb.com/1/upload?key=${imageKey}`;
+  const AxiosPublic = useAxiosPublic();
+  const useAxiosBB = useImagebb();
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const {
     register,
@@ -21,8 +21,21 @@ const BecomeAtrainer = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+    const [time, setTime] = useState("");
+    const [ampm, setAmpm] = useState("");
+
+    const handleAmpmChange = (e) => {
+      setAmpm(e.target.value);
+    };
   
+    const handleTimeChange = (e) => {
+      setTime(e.target.value);
+    };
+  
+
   const [selectedDays, setSelectedDays] = useState([]);
+  const availableTime = `${time} ${ampm}`;
   const daysOptions = [
     { value: "Sun", label: "Sunday" },
     { value: "Mon", label: "Monday" },
@@ -38,53 +51,59 @@ const BecomeAtrainer = () => {
       console.log("Image not found");
       return;
     }
-    
+
     const imgFile = new FormData();
-    imgFile.append('image', formData.image[0]);
-    
+    imgFile.append("image", formData.image[0]);
+
     try {
-      const imgUploadResponse = await useAxiosBB.post(img_hosting_api_key, imgFile, {
-        headers: {
-          'Content-Type': 'multipart/form-data', 
-        },
-      });
-  
+      const imgUploadResponse = await useAxiosBB.post(
+        img_hosting_api_key,
+        imgFile,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
       if (imgUploadResponse.data.success) {
         const trainerData = {
           profileImage: imgUploadResponse.data.data.display_url,
           name: formData.name,
+          socialIcons: formData.socialIcons || ["LinkedIn", "Instagram"],
           email: user.email,
           age: formData.age,
           experience: formData.experience,
           expertise: formData.skills,
-          availableDays: selectedDays.map(day => day.value),
-          availableTime: formData.availableTime,
+          availableSlots: selectedDays.map((day) => ({
+            day: day.value,
+            time: availableTime,
+          })),
+          // availableTime: formData.availableTime,
           details: formData.details,
-          status: 'pending',
+          status: "pending",
         };
-  
-        await AxiosPublic.post('/trainer', trainerData);
+
+        await AxiosPublic.post("/trainer", trainerData);
         reset();
-        navigate('/');
+        navigate("/");
         Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Trainer Request Successful',
+          position: "top-end",
+          icon: "success",
+          title: "Trainer Request Successful",
           showConfirmButton: false,
           timer: 1500,
         });
       }
     } catch (error) {
-      console.error('Error uploading image:', error);
+      console.error("Error uploading image:", error);
     }
   };
-  
+
   return (
     <div className="bg-white shadow-xl my-8 py-5 rounded">
       <Helmet>
-        <title>
-          All Trainer || Be a Trainer
-        </title>
+        <title>All Trainer || Be a Trainer</title>
       </Helmet>
       <h1 className="text-center font-semibold underline">Be A Trainer Form</h1>
       <div className="w-9/12 mx-auto flex flex-col gap-4">
@@ -99,7 +118,9 @@ const BecomeAtrainer = () => {
             placeholder="Enter Your Full Name"
             className="input input-bordered w-full"
           />
-          {errors.name && <p className="text-red-500 text-sm">Name is required</p>}
+          {errors.name && (
+            <p className="text-red-500 text-sm">Name is required</p>
+          )}
 
           {/* Email */}
           <label className="label">
@@ -123,7 +144,9 @@ const BecomeAtrainer = () => {
             placeholder="Enter Your Age"
             className="input input-bordered w-full"
           />
-          {errors.age && <p className="text-red-500 text-sm">Age is required</p>}
+          {errors.age && (
+            <p className="text-red-500 text-sm">Age is required</p>
+          )}
 
           {/* experience */}
           <label className="label">
@@ -135,7 +158,9 @@ const BecomeAtrainer = () => {
             placeholder="Enter Your Experience"
             className="input input-bordered w-full"
           />
-          {errors.experience && <p className="text-red-500 text-sm">experience is required</p>}
+          {errors.experience && (
+            <p className="text-red-500 text-sm">experience is required</p>
+          )}
 
           {/* Skills */}
           <label className="label">
@@ -175,30 +200,52 @@ const BecomeAtrainer = () => {
           <label className="label">
             <span className="label-text">Available Time</span>
           </label>
+
+          <div className="flex gap-4">
+          {/* Time Input */}
           <input
-            {...register("availableTime", { required: true })}
             type="text"
-            placeholder="Enter Available Time (e.g., 9 AM - 5 PM)"
+            value={time}
+            onChange={handleTimeChange}
+            placeholder="Enter Time (e.g., 9:00)"
             className="input input-bordered w-full"
           />
+
+          {/* AM/PM Selector */}
+          <select
+            value={ampm}
+            onChange={handleAmpmChange}
+            className="select select-bordered w-28"
+          >
+            <option value="" disabled>
+              Select
+            </option>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
           {errors.availableTime && (
             <p className="text-red-500 text-sm">Available time is required</p>
           )}
-           <label className="label">
+          <label className="label">
             <span className="label-text">Details</span>
           </label>
           <input
             {...register("details", { required: true })}
             type="text"
-             placeholder="Enter Details"
+            placeholder="Enter Details"
             className="input input-bordered w-full"
           />
 
-           <label className="label">
+          <label className="label">
             <span className="label-text">Profile Image</span>
           </label>
           <div className="mb-6">
-          <input {...register("image")} type="file" className="file-input w-full max-w-xs" />
+            <input
+              {...register("image")}
+              type="file"
+              className="file-input w-full max-w-xs"
+            />
           </div>
 
           {/* Apply Button */}

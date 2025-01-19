@@ -13,7 +13,7 @@ const useTrainer = () => {
             const res = await AxiosSecure.get(`/check-trainer/${user?.email}`);
             if (res?.data) {
               console.log(res.data.trainer);
-              return res.data.trainer || false;
+              return res.data.trainer ;
             }
             return false;
           } catch (error) {

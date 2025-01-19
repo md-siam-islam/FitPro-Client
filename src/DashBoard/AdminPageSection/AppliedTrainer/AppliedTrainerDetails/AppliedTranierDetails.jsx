@@ -29,7 +29,7 @@ const AppliedTrainerDetails = () => {
         Swal.fire({
           icon: "success",
           title: "Trainer Approved!",
-          text: `${res.data.trainer.name} is now a trainer.`,
+          text: `${res?.data?.trainer?.name} is now a trainer.`,
           confirmButtonText: "OK",
         });
 
@@ -115,7 +115,7 @@ const AppliedTrainerDetails = () => {
         </div>
         <div className="flex justify-center gap-4 mt-6">
           <button
-            onClick={() => handleConfirm(trainer._id)}
+            onClick={() => handleConfirm(trainer?._id)}
             className="btn btn-success"
           >
             Confirm

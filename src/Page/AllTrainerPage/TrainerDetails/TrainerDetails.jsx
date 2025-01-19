@@ -85,7 +85,7 @@ const TrainerDetails = () => {
         <div className="mt-8 p-5 bg-white rounded-lg shadow-lg">
           <h3 className="text-xl font-bold mb-4">Available Slots</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {availableSlots.map((slot, index) => (
+            {availableSlots?.map((slot, index) => (
               <Link to={`/trainerbooked/${name}/${slot.day}-${slot.time}/${expertise.join(",")}`}><button
               key={index}
               className="btn btn-outline bg-orange-500 text-white rounded-md px-4 py-2"
