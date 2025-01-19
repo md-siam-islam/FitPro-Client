@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 const ProfileUpdate = () => {
     const navigate = useNavigate()
-  const { user } = useContext(AuthContext);
+  const { user,setUser} = useContext(AuthContext);
   const [name, setName] = useState(user?.displayName || "");
   const [profilePicture, setProfilePicture] = useState(user?.photoURL || "");
 

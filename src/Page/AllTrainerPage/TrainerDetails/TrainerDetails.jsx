@@ -1,14 +1,17 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useAxiosPublic from "../../../Components/UseAxiosPublic/useAxiosPublic";
 import { Helmet } from "react-helmet";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 const TrainerDetails = () => {
+  const navigate = useNavigate()
   const { id } = useParams();
   const AxiosPublic = useAxiosPublic();
+  const [fitUser , setFitUser] =useState()
+  console.log(fitUser);
 
-  // Fetch trainer details using react-query
   const { data: trainerDetails = {} } = useQuery({
     queryKey: ["trainerDetails", id],
     queryFn: async () => {
@@ -16,6 +19,13 @@ const TrainerDetails = () => {
       return res.data;
     },
   });
+
+  useEffect(() => {
+    AxiosPublic.get('/user')
+    .then((res) => {
+      setFitUser(res.data)
+    })
+  },[])
 
   // Destructuring trainer details
   const {
@@ -27,6 +37,7 @@ const TrainerDetails = () => {
     availableSlots,
     details,
   } = trainerDetails;
+
 
   return (
     <div>
@@ -103,9 +114,11 @@ const TrainerDetails = () => {
           If you are passionate about training and helping others achieve their
           goals, join our team of expert trainers.
         </p>
+
         <Link to={"/becometrainer"}>
           <button className="btn bg-[#FFA500]">Become a Trainer</button>
         </Link>
+        
       </div>
       
     </div>

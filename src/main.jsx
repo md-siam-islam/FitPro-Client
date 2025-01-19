@@ -29,6 +29,7 @@ import Privetroute from "./PrivetRoute/Privetroute";
 import AppliedTranierDetails from "./DashBoard/AdminPageSection/AppliedTrainer/AppliedTrainerDetails/AppliedTranierDetails";
 import ProfileUpdate from "./UpdateProfile/ProfileUpdate";
 import ErrorPage from "./Components/ErrorPage/ErrorPage";
+import Payment from "./Page/PaymentPage/Payment";
 
 const queryClient = new QueryClient();
 
@@ -61,7 +62,10 @@ const router = createBrowserRouter([
       {
         path: "/becometrainer",
         element: <Privetroute><BecomeAtrainer></BecomeAtrainer></Privetroute>,
-      },
+      },{
+        path:'/payment/:name/:solt/:pkg',
+        element:<Privetroute><Payment></Payment></Privetroute>
+      }
     ],
   },
   {

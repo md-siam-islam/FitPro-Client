@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const TrainerBookedPage = () => {
   const { trainername, solt, expertise } = useParams();
 
   const [day, time] = solt.split("-");
   const expertiseArray = expertise.split(",");
-
+  const [selectPakage,setSelectPakage] = useState()
+  console.log(selectPakage)
   const packages = [
     {
       name: "Basic Membership",
@@ -35,6 +36,10 @@ const TrainerBookedPage = () => {
       price: 100,
     },
   ];
+
+  const handleJoinNow = (pakage) => {
+    setSelectPakage(pakage)
+  }
 
   return (
     <div className="my-10">
@@ -76,7 +81,7 @@ const TrainerBookedPage = () => {
                     <input
                       type="radio"
                       name="membership"
-                      onClick={() => handleJoinNow(pkg.name)}
+                      onClick={() => handleJoinNow(pkg)}
                     />
                   </td>
                 </tr>
@@ -84,7 +89,8 @@ const TrainerBookedPage = () => {
             </tbody>
           </table>
         </div>
-        <button className="btn bg-[#FFA500] mt-6 text-white font-semibold">Join Now</button>
+       <Link to={`/payment/${trainername}/${solt}/${encodeURIComponent(JSON.stringify(selectPakage))}`}> <button className="btn bg-[#FFA500] mt-6 text-white font-semibold">Join Now</button>
+       </Link>
       </div>
     </div>
   );
