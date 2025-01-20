@@ -4,18 +4,22 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { FaArrowLeft } from "react-icons/fa";
 import useAxiosSecure from "../../../../Hook/UseAxiosSecure/useAxiosSecure";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../../AuthProvider/AuthProvider";
 
 const AppliedTrainerDetails = () => {
+  const {user} = useContext(AuthContext)
   const { id } = useParams();
   const AxiosPublic = useAxiosPublic();
-  const AxiosSecure = useAxiosSecure()
+  const AxiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const [reject, setReject] = useState()
 
   const { data: trainer = {}, refetch } = useQuery({
     queryKey: ["trainer", id],
     queryFn: async () => {
       const res = await AxiosPublic.get(`/allTrainer/${id}`);
-      
+
       return res.data;
     },
   });
@@ -46,40 +50,41 @@ const AppliedTrainerDetails = () => {
     }
   };
 
-  const hadleFedback = (id, trainerName) => {
-    AxiosPublic.delete(`/trainer-delete/${id}`)
-      .then((res) => {
-        if (res.data.deletedCount > 0) {
+  const hadleFedback = async (id) => {
+    const data ={reject , email:trainer.email}
+    try {
+      const deleteRes = await AxiosPublic.put(`/trainer-delete/${id}`);
+      if (deleteRes.data.matchedCount > 0) {
+        const rejectRes = await AxiosPublic.post('/reject',data);
+        if (rejectRes.data.insertedId) {
+          document.getElementById("my_modal_5").close();
+          setTimeout(() => {
+            navigate("/dashboard/appliedtrainer");
+          }, 500);
           Swal.fire({
             icon: "success",
-            title: "Trainer Rejected",
+            title:"Trainer Rejected",
             text: `${trainerName} has been successfully rejected.`,
             confirmButtonText: "OK",
-          }).then(() => {
-            document.getElementById("my_modal_5").close();
-            navigate('/dashboard/appliedtrainer');
           });
         } else {
-          Swal.fire({
-            icon: "error",
-            title: "Action Failed",
-            text: "Unable to reject the trainer. Please try again.",
-            confirmButtonText: "Retry",
-          });
+          throw new Error("Failed to insert rejection data");
         }
-      })
-      .catch((error) => {
-        console.error("Error rejecting trainer:", error);
-        Swal.fire({
-          icon: "error",
-          title: "Network Error",
-          text: "Something went wrong. Please check your connection and try again.",
-          confirmButtonText: "OK",
-        });
+      } else {
+        throw new Error("Trainer not found for deletion");
+      }
+    } catch (error) {
+      console.error("Error rejecting trainer:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message || "Something went wrong. Please try again.",
+        confirmButtonText: "OK",
       });
+    }
   };
   
-
+  
   return (
     <div className="w-10/12 mx-auto mt-10">
       <Link to={"/dashboard/appliedtrainer"} className="btn bg-[#FFA500] mb-4">
@@ -120,56 +125,65 @@ const AppliedTrainerDetails = () => {
           >
             Confirm
           </button>
-          <button  onClick={() => document.getElementById("my_modal_5").showModal()} className="btn btn-error">
+          <button
+            onClick={() => document.getElementById("my_modal_5").showModal()}
+            className="btn btn-error"
+          >
             Reject
           </button>
         </div>
       </div>
 
       {/* modal section start  */}
- <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-  <div className="modal-box">
-    <h3 className="font-bold text-lg text-red-600 mb-4">Reject Trainer</h3>
-    <p className="text-gray-700">
-      Are you sure you want to reject{" "}
-      <span className="font-semibold text-gray-900">{trainer.name}</span>?
-    </p>
-    <p className="mt-2 text-gray-600">
-      <strong>Experience:</strong> {trainer.experience} years
-    </p>
+      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg text-red-600 mb-4">
+            Reject Trainer
+          </h3>
+          <p className="text-gray-700">
+            Are you sure you want to reject{" "}
+            <span className="font-semibold text-gray-900">{trainer.name}</span>?
+          </p>
+          <p className="mt-2 text-gray-600">
+            <strong>Experience:</strong> {trainer.experience} years
+          </p>
 
-    <div className="mt-4">
-      <label htmlFor="feedback" className="block font-medium text-gray-800">
-        Feedback
-      </label>
-      <textarea
-        id="feedback"
-        className="textarea textarea-bordered w-full mt-2"
-        rows="4"
-        placeholder="Provide feedback here..."
-        required
-      ></textarea>
-    </div>
+          <div className="mt-4">
+            <label
+              htmlFor="feedback"
+              className="block font-medium text-gray-800"
+            >
+              Feedback
+            </label>
+            <textarea
+              id="feedback"
+              className="textarea textarea-bordered w-full mt-2"
+              rows="4"
+              value={reject}
+              onChange={(e) => setReject(e.target.value)}
+              placeholder="Provide feedback here..."
+              required>
+            </textarea>
+          </div>
 
-    <div className="modal-action flex justify-between mt-6">
-      {/* Submit Button */}
-      <button
-      onClick={() =>hadleFedback(trainer._id,trainer.name)}
-        className="btn btn-error text-white w-40"
-      >
-        Submit Feedback
-      </button>
+          <div className="modal-action flex justify-between mt-6">
+            {/* Submit Button */}
+            <button
+              onClick={() => hadleFedback(trainer._id)}
+              className="btn btn-error text-white w-40"
+            >
+              Submit Feedback
+            </button>
 
-      {/* Close Button */}
-      <form method="dialog">
-        <button className="btn btn-outline w-40">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>
+            {/* Close Button */}
+            <form method="dialog">
+              <button className="btn btn-outline w-40">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
 
       {/* modal section end */}
-
     </div>
   );
 };
