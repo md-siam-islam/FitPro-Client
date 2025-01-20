@@ -89,6 +89,7 @@ const router = createBrowserRouter([
         path: "booked",
         element: <Bookedpage></Bookedpage>,
       },
+     
 
       // admin dashboard route
 
