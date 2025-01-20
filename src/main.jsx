@@ -31,6 +31,7 @@ import ProfileUpdate from "./UpdateProfile/ProfileUpdate";
 import ErrorPage from "./Components/ErrorPage/ErrorPage";
 import Payment from "./Page/PaymentPage/Payment";
 import AdminRout from "./Admirout/AdminRout";
+import TrainersRout from "./TrainersRout/TrainersRout";
 
 const queryClient = new QueryClient();
 
@@ -96,7 +97,7 @@ const router = createBrowserRouter([
 
       {
         path: "newsletter",
-        element: <Newslettersubscribers></Newslettersubscribers>,
+        element: <AdminRout><Newslettersubscribers></Newslettersubscribers></AdminRout>,
       },
       {
         path: "alltrainer",
@@ -104,30 +105,30 @@ const router = createBrowserRouter([
       },
       {
         path: "balance",
-        element: <Balance></Balance>,
+        element: <AdminRout><Balance></Balance></AdminRout>,
       },
       {
         path: "appliedtrainer",
-        element: <AppliedTrainer></AppliedTrainer>,
+        element: <AdminRout><AppliedTrainer></AppliedTrainer></AdminRout>,
       },
       {
         path: "addnewclass",
-        element: <AddnewClass></AddnewClass>,
+        element: <AdminRout><AddnewClass></AddnewClass></AdminRout>,
       },
       // admin route end
 
       // Trainer route stat
       {
         path: "manageSlot",
-        element: <ManageSolt></ManageSolt>,
+        element: <TrainersRout><ManageSolt></ManageSolt></TrainersRout>,
       },
       {
         path: "addnewsolt",
-        element: <AddNewSlot></AddNewSlot>,
+        element: <TrainersRout><AddNewSlot></AddNewSlot></TrainersRout>,
       },
       {
         path: "addnewporum",
-        element: <AddNewForum></AddNewForum>,
+        element: <TrainersRout><AddNewForum></AddNewForum></TrainersRout>,
       },
     ],
   },
