@@ -1,9 +1,13 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import useAdmin from "../../Hook/UseAdmin/useAdmin";
+import useTrainer from "../../Hook/Usetrainer/useTrainer";
 
 const Navbar = () => {
   const { user, userLogout } = useContext(AuthContext);
+  const [isAdmin] = useAdmin()
+  const [isTrainer] = useTrainer()
   return (
     <div className="navbar bg-base-100 px-8">
       <div className="navbar-start">
@@ -99,14 +103,41 @@ const Navbar = () => {
               <a>Community</a>
             </li>{" "}
           </NavLink>
-         {
+
+          {user && isAdmin &&(
+            <NavLink to={'/dashboard/alltrainer'}>
+            <li>
+              <a>Dashboard</a>
+            </li>{" "}
+          </NavLink>
+          )}
+
+          {user && !isAdmin && isTrainer && (
+            <NavLink to={'/dashboard/manageSlot'}>
+            <li>
+              <a>Dashboard</a>
+            </li>{" "}
+          </NavLink>
+          )}
+
+          {user && !isAdmin && !isTrainer && (
+            <NavLink to={'/dashboard/profile'}>
+            <li>
+              <a>Dashboard</a>
+            </li>{" "}
+          </NavLink>
+          )}
+
+
+
+         {/* {
           user ?  
           <NavLink to={'/dashboard'}>
           <li>
             <a>Dashboard</a>
           </li>{" "}
         </NavLink> : ''
-         }
+         } */}
         </ul>
       </div>
       <div className="navbar-end gap-3">

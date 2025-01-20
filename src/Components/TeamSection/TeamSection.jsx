@@ -34,7 +34,7 @@ const TeamSection = () => {
                                 className="w-32 h-32 mx-auto rounded-full mb-4 object-cover"
                             />
                             <h3 className="text-xl font-semibold mb-2">{trainer.name}</h3> 
-                            <p className="text-gray-600 mb-4">Experience: {trainer.experience}</p>
+                            <p className="text-gray-600 mb-4">Experience: {trainer.experience} Years</p>
                             <h4 className="text-gray-800 font-medium">Expertise:</h4>
                             <p className="text-gray-600">{trainer.expertise.join(', ')}</p> 
                             <p>Details : {trainer.details}</p>
