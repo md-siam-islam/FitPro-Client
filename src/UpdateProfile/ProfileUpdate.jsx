@@ -6,13 +6,14 @@ import Swal from "sweetalert2";
 const ProfileUpdate = () => {
     const navigate = useNavigate()
   const { user,setUser} = useContext(AuthContext);
-  const [name, setName] = useState(user?.displayName || "");
-  const [profilePicture, setProfilePicture] = useState(user?.photoURL || "");
+  const [name, setName] = useState();
+  const [profilePicture, setProfilePicture] = useState();
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
     console.log("Updated Name:", name);
     console.log("Updated Profile Picture:", profilePicture);
+    setUser({...user,displayName:name,photoURL:profilePicture})
     Swal.fire({
       title: "success",
       text: "Your Profile Update Done",

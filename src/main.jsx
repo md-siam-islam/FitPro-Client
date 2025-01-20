@@ -30,6 +30,7 @@ import AppliedTranierDetails from "./DashBoard/AdminPageSection/AppliedTrainer/A
 import ProfileUpdate from "./UpdateProfile/ProfileUpdate";
 import ErrorPage from "./Components/ErrorPage/ErrorPage";
 import Payment from "./Page/PaymentPage/Payment";
+import AdminRout from "./Admirout/AdminRout";
 
 const queryClient = new QueryClient();
 
@@ -99,7 +100,7 @@ const router = createBrowserRouter([
       },
       {
         path: "alltrainer",
-        element: <AllTrainers></AllTrainers>,
+        element: <AdminRout><AllTrainers></AllTrainers></AdminRout>,
       },
       {
         path: "balance",
