@@ -101,7 +101,7 @@ const TrainerDetails = () => {
               key={index}
               className="btn btn-outline bg-orange-500 text-white rounded-md px-4 py-2"
             >
-              {slot.day}, {slot.time}
+              {slot.day}, {slot.time}--({slot.name})
             </button></Link>
             ))}
           </div>
