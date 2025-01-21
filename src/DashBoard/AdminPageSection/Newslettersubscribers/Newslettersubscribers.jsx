@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useAxiosPublic from "../../../Components/UseAxiosPublic/useAxiosPublic";
+import { Helmet } from "react-helmet";
 
 const Newslettersubscribers = () => {
   const AxiosPublic = useAxiosPublic();
@@ -11,6 +12,9 @@ const Newslettersubscribers = () => {
   }, [AxiosPublic]);
   return (
     <div>
+      <Helmet>
+        <title>FitPro || Newsletter</title>
+      </Helmet>
         <h1 className="text-2xl md:text-4xl my-6 underline
          text-center font-bold">All Newsletter subscribers</h1>
       <div className="overflow-x-auto">

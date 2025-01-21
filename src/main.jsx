@@ -91,6 +91,10 @@ const router = createBrowserRouter([
         path: "booked",
         element: <Bookedpage></Bookedpage>,
       },
+      {
+        path: "addnewporum",
+        element: <AddNewForum></AddNewForum>,
+      },
      
 
       // admin dashboard route
@@ -128,7 +132,7 @@ const router = createBrowserRouter([
       },
       {
         path: "addnewporum",
-        element: <TrainersRout><AddNewForum></AddNewForum></TrainersRout>,
+        element: <AddNewForum></AddNewForum>,
       },
     ],
   },

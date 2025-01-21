@@ -3,6 +3,7 @@ import axios from "axios";
 import useAxiosPublic from "../../../Components/UseAxiosPublic/useAxiosPublic";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const AddnewClass = () => {
   const imageKey = "6f830635465660e6fbef1d712018f776";
@@ -64,6 +65,9 @@ const AddnewClass = () => {
   };
   return (
     <div className="max-w-xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
+      <Helmet>
+        <title>FitPro || Add New Class</title>
+      </Helmet>
       <h1 className="text-2xl font-bold text-center mb-6">Add New Class</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Class Name */}

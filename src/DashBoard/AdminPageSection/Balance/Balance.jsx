@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useAxiosPublic from "../../../Components/UseAxiosPublic/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { Pie, PieChart } from "recharts";
+import { Helmet } from "react-helmet";
 
 const Balance = () => {
   const AxiosPublic = useAxiosPublic();
@@ -57,6 +58,9 @@ const Balance = () => {
     </PieChart>
    </div>
       <div className="p-5 bg-gray-100 rounded-md shadow-md">
+        <Helmet>
+          <title>FitPro || Blance</title>
+        </Helmet>
         <h1 className="text-3xl font-bold underline mb-7 text-center">
           Financial Overview
         </h1>
