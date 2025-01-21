@@ -145,7 +145,7 @@ const Navbar = () => {
           <>
             <div className="relative group">
               <img
-                className="w-10 h-10 rounded-full border-2 border-[#FFA500]"
+                className="w-10 h-10 rounded-full border-2 border-[#FFA500] object-cover"
                 src={user.photoURL}
                 alt="User Avatar"
               />
