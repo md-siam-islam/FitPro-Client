@@ -1,66 +1,41 @@
-import React, { useEffect, useState } from "react";
-import useAxiosPublic from "../../Components/UseAxiosPublic/useAxiosPublic";
+import { useEffect, useState } from "react";
+import useAxiosPublic from "../UseAxiosPublic/useAxiosPublic";
+import Swal from "sweetalert2";
+
 import Admin from "../../assets/image/Admi Badge.jpg";
 import Trainer from "../../assets/image/Trainer.png";
-import Swal from "sweetalert2";
-import { useQuery } from "@tanstack/react-query";
 
-const Forum = () => {
+const LatestPost = () => {
+  const [latestPosts, setLatestPosts] = useState([]);
+  console.log(latestPosts);
   const AxiosPublic = useAxiosPublic();
-
-const [CurrentPage, setCurrentPage] = useState(1);
-
-const {
-  data: paginatedClasses = {},isLoading} = useQuery({
-  queryKey: ["paginatedClasses",CurrentPage],
-  queryFn: async () => {
-    const res = await AxiosPublic.get(`/newpost?page=${CurrentPage}&limit=6`);
-    return res.data;
-  },
-  keepPreviousData: true,
-});
-
-if (isLoading) {
-  return (
-    <div className="flex justify-center items-center h-screen">
-      <p className="text-xl font-semibold text-gray-600">Loading Forum...</p>
-    </div>
-  );
-}
-const { classes = [], totalPages = 5, currentPage = 1 } = paginatedClasses;
-const handlePageChange = (page) => {
-  if (page >= 1 && page <= totalPages) {
-    setCurrentPage(page);
-  }
-};
-
-  // useEffect(() => {
-  //   AxiosPublic.get("/newpost").then((res) => {
-  //     setForum(res.data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    AxiosPublic.get(`/newpost?limit=6&page=1`).then((res) => {
+      setLatestPosts(res.data.classes);
+    });
+  }, []);
 
   const handlevoteForum = (id) => {
-    AxiosPublic.post(`/updatevote/${id}`)
-    .then((res) => {
-      if (res.data.modifiedCount > 0) {
-        Swal.fire({
-          icon: "success",
-          title: "Trainer Rejected",
-          text: "Thankyou For Your Vote",
-          confirmButtonText: "OK",
-        });
-      }
-    });
-  };
+      AxiosPublic.post(`/updatevote/${id}`)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          Swal.fire({
+            icon: "success",
+            title: "Trainer Rejected",
+            text: "Thankyou For Your Vote",
+            confirmButtonText: "OK",
+          });
+        }
+      });
+    };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen my-11">
-      <h1 className="text-4xl font-bold text-center text-blue-600 mb-8">
-        Forum Posts
+    <div className="my-10">
+        <h1 className="text-2xl md:text-4xl font-bold text-center  mb-8 underline">
+        Latest Community
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {classes.map((item) => (
+        {latestPosts.map((item) => (
           <div
             key={item._id}
             className="bg-white rounded-lg shadow-lg p-5 flex flex-col justify-between h-full"
@@ -100,19 +75,8 @@ const handlePageChange = (page) => {
           </div>
         ))}
       </div>
-      <div className="pagination flex items-center justify-center my-5 gap-2">
-        {[...Array(totalPages).keys()].map((page) => (
-          <button
-            key={page + 1}
-            onClick={() => handlePageChange(page + 1)}
-            className={currentPage === page + 1 ? "active btn bg-[#FFA500]" : " btn"}
-          >
-            {page + 1}
-          </button>
-        ))}
-      </div>
     </div>
   );
 };
 
-export default Forum;
+export default LatestPost;

@@ -1,8 +1,37 @@
-# React + Vite
+# Project Name
+    FitPro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Live Link
 
-Currently, two official plugins are available:
+ https://simple-firebase-38852.web.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Admin username
+    md siam islam
+
+## Admin Email 
+    siamali1418@gmail.com
+
+## Admin Password
+    123Asd@
+## Client Repository Link
+
+    https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-md-siam-islam
+
+## Server Repository Link
+
+    https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-md-siam-islam
+
+### Website Feature. 
+
+    1.Allow users to customize their profiles with personal details 
+    like name, photo, age, weight, and fitness goals.
+    2.Enable users to log their daily/weekly workouts, meals, and progress.
+    3.Add a comment system where users can engage in discussions by commenting on forum posts.
+    4.Provide tailored workout plans based on the user’s fitness level (beginner, intermediate, advanced).
+    5.Include a feature where users can create and follow diet plans, with suggestions for healthy recipes.
+    6.Show users their fitness progress (e.g., weight changes, calories burned) through graphs and charts.
+    7.A collapsible hamburger menu on smaller screens and a full navigation bar on larger devices.
+    8.Forum cards or content grids that adjust based on screen size using auto-fit or auto-fill.
+    9.Images that automatically resize and maintain aspect ratio.
+    10.Floating buttons for actions like “Add Post” or “Vote” that remain accessible on all screens.
+
