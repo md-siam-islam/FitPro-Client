@@ -75,12 +75,6 @@ const AppliedTrainerDetails = () => {
       }
     } catch (error) {
       console.error("Error rejecting trainer:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: error.message || "Something went wrong. Please try again.",
-        confirmButtonText: "OK",
-      });
     }
   };
   

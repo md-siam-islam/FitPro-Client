@@ -9,26 +9,30 @@ const AllClasses = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [trainers, setTrainers] = useState([]);
 
+  const [CurrentPage, setCurrentPage] = useState(1);
+
   const {
     data: paginatedClasses = {},
     isLoading,
     error,
-    refetch,
   } = useQuery({
-    queryKey: ["paginatedClasses", searchQuery],
-    queryFn: async ({ page = 1 }) => {
-      const res = await AxiosPublic.get(`/newclass?page=${page}&limit=6&q=${searchQuery}`);
+    queryKey: ["paginatedClasses", searchQuery, CurrentPage],
+    queryFn: async () => {
+      const res = await AxiosPublic.get(`/newclass?page=${CurrentPage}&limit=6&q=${searchQuery}`);
       return res.data;
     },
     keepPreviousData: true,
   });
 
-  // const itemparPage = 6
-  // const numberOfpage = Math.ceil(paginatedClasses / itemparPage)
-
-  // const pages = [...Array(numberOfpage).keys()]
+  
 
   const { classes = [], totalPages = 5, currentPage = 1 } = paginatedClasses;
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   useEffect(() => {
     AxiosPublic.get('/trainer')
@@ -52,15 +56,6 @@ const AllClasses = () => {
       </div>
     );
   }
-
-
-//   const { data: trainers = [] } = useQuery({
-//     queryKey: ["trainer"],
-//     queryFn: async () => {
-//       const res = await AxiosPublic.get("/trainer");
-//       return res.data.filter((trainer) => trainer.role === "trainer");
-//     },
-//   });
 
   return (
     <div className="container mx-auto p-4">
@@ -141,21 +136,16 @@ const AllClasses = () => {
       </div>
 
       {/* Pagination Controls */}
-      <div className="flex justify-center mt-6 space-x-4">
+       <div className="pagination flex items-center justify-center my-5 gap-2">
         {[...Array(totalPages).keys()].map((page) => (
           <button
             key={page + 1}
-            onClick={() => refetch({ page: page + 1 })}
-            className={`px-4 py-2 rounded ${
-              currentPage === page + 1
-                ? "bg-blue-500 text-white"
-                : "bg-gray-300 text-gray-700"
-            }`}
+            onClick={() => handlePageChange(page + 1)}
+            className={currentPage === page + 1 ? "active btn bg-[#FFA500]" : " btn"}
           >
             {page + 1}
           </button>
         ))}
-
       </div>
 
     </div>

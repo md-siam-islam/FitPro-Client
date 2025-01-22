@@ -4,22 +4,14 @@ import useAxiosSecure from '../UseAxiosSecure/useAxiosSecure';
 import { useQuery } from "@tanstack/react-query";
 
 const useTrainer = () => {
-    const {user} = useContext(AuthContext)
+    const {user,loading} = useContext(AuthContext)
     const AxiosSecure = useAxiosSecure()
     const {data: isTrainer = false, isLoading: isTrainerLoading} = useQuery({
         queryKey: [user?.email, "isTrainer"],
+        enabled:!loading && !!user?.email,
         queryFn: async () => {
-          try {
-            const res = await AxiosSecure.get(`/check-trainer/${user?.email}`);
-            if (res?.data) {
-              // console.log(res.data.trainer);
-              return res.data.trainer ;
-            }
-            return false;
-          } catch (error) {
-            console.error("Error fetching trainer status:", error);
-            return false;
-          }
+          const res = await AxiosSecure.get(`/check-trainer/${user?.email}`)
+          return res.data.trainer
         }
       });
     return [isTrainer,isTrainerLoading]
