@@ -32,6 +32,7 @@ import ErrorPage from "./Components/ErrorPage/ErrorPage";
 import Payment from "./Page/PaymentPage/Payment";
 import AdminRout from "./Admirout/AdminRout";
 import TrainersRout from "./TrainersRout/TrainersRout";
+import Forum from "./Page/ForumPage/Forum";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/classes",
         element: <AllClasses></AllClasses>,
+      },
+      {
+        path:'/forum',
+        element:<Forum></Forum>
       },
       {
         path: "/becometrainer",

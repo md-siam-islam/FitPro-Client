@@ -47,7 +47,7 @@ const Navbar = () => {
                 <a>All Classes</a>
               </li>{" "}
             </NavLink>
-            <NavLink>
+            <NavLink to={'/forum'}>
               <li>
                 <a>Community</a>
               </li>{" "}
@@ -116,7 +116,12 @@ const Navbar = () => {
               <a>All Classes</a>
             </li>{" "}
           </NavLink>
-          <NavLink>
+          <NavLink to={'/forum'}
+          className={({ isActive }) =>
+            isActive
+              ? "bg-[#FFA500] text-white font-semibold rounded"
+              : "font-semibold"
+          }>
             <li>
               <a>Community</a>
             </li>{" "}

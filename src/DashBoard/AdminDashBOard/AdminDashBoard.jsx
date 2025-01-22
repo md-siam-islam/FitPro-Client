@@ -74,6 +74,20 @@ const AdminDashBoard = () => {
             Add new Class
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            to={"/dashboard/addnewporum"}
+            className={({ isActive }) =>
+              `block py-3 px-6 rounded ${
+                isActive
+                  ? " text-white font-bold bg-[#FFA500]"
+                  : "border text-white"
+              } font-bold text-center transition-all`
+            }
+          >
+           Add New Forum
+          </NavLink>
+        </li>
       </ul>
     </div>
   );
