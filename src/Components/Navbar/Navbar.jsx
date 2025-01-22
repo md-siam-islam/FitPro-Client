@@ -52,11 +52,29 @@ const Navbar = () => {
                 <a>Community</a>
               </li>{" "}
             </NavLink>
-            <NavLink>
-              <li>
-                <a>Dashboard</a>
-              </li>{" "}
-            </NavLink>
+            {user && isAdmin &&(
+            <NavLink to={'/dashboard/alltrainer'}>
+            <li>
+              <a>Dashboard</a>
+            </li>{" "}
+          </NavLink>
+          )}
+
+          {user && !isAdmin && isTrainer && (
+            <NavLink to={'/dashboard/manageSlot'}>
+            <li>
+              <a>Dashboard</a>
+            </li>{" "}
+          </NavLink>
+          )}
+
+          {user && !isAdmin && !isTrainer && (
+            <NavLink to={'/dashboard/profile'}>
+            <li>
+              <a>Dashboard</a>
+            </li>{" "}
+          </NavLink>
+          )}
           </ul>
         </div>
         <a className="btn btn-ghost text-2xl">
@@ -128,16 +146,6 @@ const Navbar = () => {
           </NavLink>
           )}
 
-
-
-         {/* {
-          user ?  
-          <NavLink to={'/dashboard'}>
-          <li>
-            <a>Dashboard</a>
-          </li>{" "}
-        </NavLink> : ''
-         } */}
         </ul>
       </div>
       <div className="navbar-end gap-3">

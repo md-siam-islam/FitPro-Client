@@ -21,7 +21,7 @@ const Signup = () => {
     const name = event.target.name.value;
     const photo = event.target.photo.value;
     const email = event.target.email.value.toLowerCase();
-    console.log(email);
+    // console.log(email);
     const password = event.target.password.value;
     const tram = event.target.tram.checked;
 

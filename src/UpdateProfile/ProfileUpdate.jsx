@@ -11,8 +11,8 @@ const ProfileUpdate = () => {
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
-    console.log("Updated Name:", name);
-    console.log("Updated Profile Picture:", profilePicture);
+    // console.log("Updated Name:", name);
+    // console.log("Updated Profile Picture:", profilePicture);
     setUser({...user,displayName:name,photoURL:profilePicture})
     Swal.fire({
       title: "success",

@@ -1,10 +1,10 @@
 import axios from "axios";
 
 export const useAxiosBB = axios.create({
-    baseURL:'http://localhost:5000'
-})
+  baseURL: "https://assignment-12-server-red-one.vercel.app",
+});
 const useImagebb = () => {
-    return useAxiosBB
+  return useAxiosBB;
 };
 
 export default useImagebb;

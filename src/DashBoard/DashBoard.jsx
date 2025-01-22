@@ -11,7 +11,7 @@ const DashBoard = () => {
   const [isTrainer] = useTrainer()
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 w-full lg:w-11/12 mx-auto">
+    <div className="flex flex-col lg:flex-row gap-8 w-full ">
       {/* Sidebar */}
       <div className="w-full lg:w-64 min-h-screen px-5 py-8 bg-gray-800">
         <div>

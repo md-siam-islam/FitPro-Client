@@ -15,7 +15,7 @@ const AddNewSlot = () => {
   const [selectedDays, setSelectedDays] = useState([]);
 
   const expertise = selectedClasses.map((item) => item.value);
-  console.log("this is a skil", expertise);
+  "this is a skil", expertise;
 
   useEffect(() => {
     // Fetch trainer data based on user's email
@@ -27,7 +27,7 @@ const AddNewSlot = () => {
   useEffect(() => {
     AxiosPublic.get("/newclass")
       .then((res) => {
-        console.log("Fetched data:", res.data);
+        // console.log("Fetched data:", res.data);
         if (Array.isArray(res.data)) {
           setClasses(res.data);
         } else {
@@ -79,7 +79,7 @@ const AddNewSlot = () => {
     classes && classes[0]?.classes
       ? classes[0]?.classes.map((classItem) => classItem.className)
       : [];
-  console.log(classNames);
+  // console.log(classNames);
 
   return (
     <div className="max-w-3xl mx-auto p-5 bg-white shadow rounded">

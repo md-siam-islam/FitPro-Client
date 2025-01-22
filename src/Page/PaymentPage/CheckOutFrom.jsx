@@ -15,7 +15,7 @@ const CheckOutFrom = ({price,pkgname,solt,name}) => {
   const AxiosPublic = useAxiosPublic();
   const navigate = useNavigate()
 
-console.log(price,solt,name,pkgname)
+// console.log(price,solt,name,pkgname)
   useEffect(() => {
     AxiosPublic
       .post("/create-payment-intent", { price: price })
@@ -80,7 +80,7 @@ console.log(price,solt,name,pkgname)
         };
 
         AxiosPublic.post("/payment", paymentInfo).then((res) => {
-            console.log(res);
+            // console.log(res);
           if (res?.data?.insertedId) {
             navigate('/')
             Swal.fire({

@@ -7,7 +7,7 @@ const Bookedpage = () => {
   const { user } = useContext(AuthContext);
 
   const [bookedTrainer, setBookedTrainer] = useState([]);
-  console.log(bookedTrainer);
+  // console.log(bookedTrainer);
 
   useEffect(() => {
     if (user?.email) {
@@ -39,7 +39,7 @@ const Bookedpage = () => {
       }
     });
 
-    console.log("Review Submitted: ", reviewData);
+    // console.log("Review Submitted: ", reviewData);
    
   };
   const handleclose = () => {

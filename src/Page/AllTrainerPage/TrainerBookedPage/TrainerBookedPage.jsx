@@ -8,7 +8,7 @@ const TrainerBookedPage = () => {
   const [day, time] = solt.split("-");
   const expertiseArray = expertise.split(",");
   const [selectPakage,setSelectPakage] = useState()
-  console.log(selectPakage)
+  // console.log(selectPakage)
   const packages = [
     {
       name: "Basic Membership",

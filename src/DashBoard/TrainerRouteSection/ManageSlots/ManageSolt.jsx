@@ -34,7 +34,7 @@ const ManageSolt = () => {
                 {trainerSlots.slots?.map((slot, index) => (
                   <tr key={index} className="border border-gray-300">
                     <td className="border border-gray-300 px-4 py-2">{slot.day}</td>
-                    <td className="border border-gray-300 px-4 py-2">{slot.time}</td>
+                    <td className="border border-gray-300 px-4 py-2">{slot.time} {slot.name}</td>
                     <td className={`border border-gray-300 px-4 py-2 ${slot.status === 'booked' ? 'text-red-500' : 'text-green-500'}`}>
                       {slot.status}
                     </td>
@@ -42,7 +42,9 @@ const ManageSolt = () => {
                       {slot.bookedBy ? `${slot.bookedBy} (${slot.bookedEmail})` : 'N/A'}
                     </td>
                     <td className="border border-gray-300 px-4 py-2">{slot.tansictionId || 'N/A'}</td>
-                    <td className="border border-gray-300 px-4 py-2 text-red-500 "><MdDelete className="text-2xl" /></td>
+                    <td className="border border-gray-300 px-4 py-2 text-red-500 ">
+                        <button><MdDelete className="text-2xl" /></button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

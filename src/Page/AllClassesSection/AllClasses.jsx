@@ -23,7 +23,12 @@ const AllClasses = () => {
     keepPreviousData: true,
   });
 
-  const { classes = [], totalPages = 1, currentPage = 1 } = paginatedClasses;
+  // const itemparPage = 6
+  // const numberOfpage = Math.ceil(paginatedClasses / itemparPage)
+
+  // const pages = [...Array(numberOfpage).keys()]
+
+  const { classes = [], totalPages = 5, currentPage = 1 } = paginatedClasses;
 
   useEffect(() => {
     AxiosPublic.get('/trainer')
@@ -106,7 +111,7 @@ const AllClasses = () => {
                 <h3 className="font-bold text-lg">Trainers for {classInfo.className}</h3>
                 <div className="grid grid-cols-2 gap-4 mt-4">
                   {trainers
-                    .filter((trainer) => trainer.expertise.includes(classInfo.className))
+                    .filter((trainer) => trainer?.expertise.includes(classInfo.className ? classInfo.className : ''))
                     .slice(0, 5)
                     .map((trainer) => (
                       <div key={trainer._id} className="flex items-center space-x-4">
@@ -150,7 +155,9 @@ const AllClasses = () => {
             {page + 1}
           </button>
         ))}
+
       </div>
+
     </div>
   );
 };

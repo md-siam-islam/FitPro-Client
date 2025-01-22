@@ -46,7 +46,7 @@ const AuthProvider = ({ children }) => {
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser || null);
-        console.log(currentUser);
+        // console.log(currentUser);
         const userData = { email: currentUser.email };
         AxiosPublic.post("/jwt", userData).then((res) => {
           if (res.data.token) {

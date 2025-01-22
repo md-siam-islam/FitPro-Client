@@ -20,7 +20,7 @@ const AddnewClass = () => {
 
   const onSubmit = async (formData) => {
     if (!formData.image || !formData.image[0]) {
-      console.log("Image not found");
+      // console.log("Image not found");
       return;
     }
 
@@ -61,7 +61,7 @@ const AddnewClass = () => {
     } catch (error) {
       console.error("Error uploading image:", error);
     }
-    console.log(formData);
+    // console.log(formData);
   };
   return (
     <div className="max-w-xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">

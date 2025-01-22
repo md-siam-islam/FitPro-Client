@@ -64,7 +64,7 @@ const AllTrainers = () => {
             <title>Dashboard || All Trainer</title>
         </Helmet>
         <h1 className="text-2xl md:text-4xl font-bold border-y-2 text-center mb-5">All Trainers Page</h1>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto w-full lg:w-10/12 mx-auto">
         <table className="table">
           {/* head */}
           <thead>

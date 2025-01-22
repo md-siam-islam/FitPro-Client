@@ -10,7 +10,7 @@ const TrainerDetails = () => {
   const { id } = useParams();
   const AxiosPublic = useAxiosPublic();
   const [fitUser , setFitUser] =useState()
-  console.log(fitUser);
+  // console.log(fitUser);
 
   const { data: trainerDetails = {} } = useQuery({
     queryKey: ["trainerDetails", id],
@@ -101,7 +101,7 @@ const TrainerDetails = () => {
               key={index}
               className="btn btn-outline bg-orange-500 text-white rounded-md px-4 py-2"
             >
-              {slot.day}, {slot.time}--({slot.name})
+              {slot.day}, {slot.time} {slot.name}
             </button></Link>
             ))}
           </div>

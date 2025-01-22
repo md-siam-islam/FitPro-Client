@@ -48,7 +48,7 @@ const BecomeAtrainer = () => {
 
   const onSubmit = async (formData) => {
     if (!formData.image || !formData.image[0]) {
-      console.log("Image not found");
+      // console.log("Image not found");
       return;
     }
 
