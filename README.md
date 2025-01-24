@@ -5,21 +5,13 @@
 
  https://simple-firebase-38852.web.app
 
-## Admin username
-    md siam islam
-
-## Admin Email 
-    siamali1418@gmail.com
-
-## Admin Password
-    123Asd@
 ## Client Repository Link
 
-    https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-md-siam-islam
+    https://github.com/md-siam-islam/FitPro-Client
 
 ## Server Repository Link
 
-    https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-md-siam-islam
+    https://github.com/md-siam-islam/FitPro-Server
 
 ### Website Feature. 
 
