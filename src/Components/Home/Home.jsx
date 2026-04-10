@@ -8,6 +8,7 @@ import Featuredsection from '../Featuredsection/Featuredsection';
 import LatestPost from '../LatestPost/LatestPost';
 import WhyChooseUs from '../WhychooseUs/Whychooseus';
 import Faq from '../FAQ/Faq';
+import ContactUs from '../ContactUs/ContactUs';
 
 const Home = () => {
     return (
@@ -24,6 +25,7 @@ const Home = () => {
             <WhyChooseUs></WhyChooseUs>
             <Faq></Faq>
             <Testimonials></Testimonials>
+            <ContactUs></ContactUs>
         </div>
     );
 };
