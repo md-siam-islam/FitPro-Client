@@ -7,6 +7,7 @@ import Testimonials from '../TestimonialsSection/Testimonials';
 import Featuredsection from '../Featuredsection/Featuredsection';
 import LatestPost from '../LatestPost/LatestPost';
 import WhyChooseUs from '../WhychooseUs/Whychooseus';
+import Faq from '../FAQ/Faq';
 
 const Home = () => {
     return (
@@ -21,6 +22,7 @@ const Home = () => {
             <Subscribe></Subscribe>
             <Featuredsection></Featuredsection>
             <WhyChooseUs></WhyChooseUs>
+            <Faq></Faq>
             <Testimonials></Testimonials>
         </div>
     );
