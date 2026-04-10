@@ -133,12 +133,12 @@ const LatestPost = () => {
               </div>
 
               {/* Read more */}
-              <button
+              {/* <button
                 className="text-[12px] font-medium text-[#1a1a2e] px-3.5 py-1.5 rounded-lg transition-all duration-200 hover:bg-[#1a1a2e] hover:text-[#FFB732]"
                 style={{ border: "0.5px solid #1a1a2e" }}
               >
                 Read More →
-              </button>
+              </button> */}
             </div>
           </div>
         ))}
