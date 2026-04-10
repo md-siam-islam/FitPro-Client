@@ -6,6 +6,7 @@ import Subscribe from '../SubscribeSection/Subscribe';
 import Testimonials from '../TestimonialsSection/Testimonials';
 import Featuredsection from '../Featuredsection/Featuredsection';
 import LatestPost from '../LatestPost/LatestPost';
+import WhyChooseUs from '../WhychooseUs/Whychooseus';
 
 const Home = () => {
     return (
@@ -19,6 +20,7 @@ const Home = () => {
             <LatestPost></LatestPost>
             <Subscribe></Subscribe>
             <Featuredsection></Featuredsection>
+            <WhyChooseUs></WhyChooseUs>
             <Testimonials></Testimonials>
         </div>
     );
