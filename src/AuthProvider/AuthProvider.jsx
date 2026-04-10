@@ -18,10 +18,13 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const AxiosPublic = useAxiosPublic();
   const provider = new GoogleAuthProvider();
+
   const signupUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
+
+ 
 
   const userLogin = (email, password) => {
     setLoading(true);

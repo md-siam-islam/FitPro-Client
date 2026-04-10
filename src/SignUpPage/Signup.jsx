@@ -56,7 +56,8 @@ const Signup = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setUser(user);
-        userInfo({ displayName: name, photoURL: photo }).then(() => {
+        userInfo({ displayName: name, photoURL: photo })
+        .then(() => {
           const userData = {
             name: name,
             email: email,
